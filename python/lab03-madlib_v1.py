@@ -1,3 +1,7 @@
+'''
+Basic Mad Libs
+'''
+
 adjective1 = input("Give me an adjective:\n")
 noun1 = input("Give me a noun:\n")
 noun2 = input("Give me a plural noun:\n")

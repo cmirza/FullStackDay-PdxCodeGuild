@@ -1,3 +1,7 @@
+'''
+Using lists with .split() function
+'''
+
 adjective1 = input("Give me an adjective:\n")
 input_noun = input("Give me two nouns separated by commas:\n")
 input_noun.split(", ")
