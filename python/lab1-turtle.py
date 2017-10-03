@@ -1,3 +1,8 @@
+'''
+Lab 1: Drawing a stick figure using turtle
+'''
+
+
 from turtle import *
 
 #draw body
