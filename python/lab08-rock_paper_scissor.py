@@ -8,7 +8,7 @@ valid_choice = ('rock','paper','scissor')
 
 computer_choice = random.choice(valid_choice)
 
-user_choice = input("Rock, Paper or Scissors?\n")
+user_choice = input("Rock, Paper or Scissor?\n")
 user_choice = user_choice.lower()
 
 if user_choice == "rock":
