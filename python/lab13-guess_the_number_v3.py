@@ -19,5 +19,5 @@ while True:  # begin input loop
         print("Correct! The number was", chosen_number,". It took you", play_count, "guesses.")
         break
     elif number_guess == "done":  # if user ends game
-        print("You made", play_count, "guesses.")
+        print("Goodbye!")
         break
