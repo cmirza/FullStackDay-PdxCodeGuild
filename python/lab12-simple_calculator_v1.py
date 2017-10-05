@@ -2,7 +2,6 @@
 Lab 12 - Simple Calculator
 '''
 
-
 oper = input("What is the operation you'd like to perform? ")  # prompt for operator
 
 num_1 = input("What is the first number? ")  # prompt for the first operand
