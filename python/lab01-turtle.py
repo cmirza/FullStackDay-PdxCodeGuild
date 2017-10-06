@@ -2,7 +2,6 @@
 Lab 01 - Turtle
 '''
 
-
 from turtle import *
 
 #draw body

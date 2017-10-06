@@ -29,6 +29,6 @@ def mean(nums):  # define function
 
 values = [1, 12, 2, 53, 23, 6, 17]  # list values
 
-print("Largest number in list: ", minimum(values), "\n")
-print("Smallest number in list: ", maximum(values), "\n")
-print("Mean of numbers in list: ", mean(values), "\n")
+print("Largest number in list: ", minimum(values), "\n")  # output largest number in list
+print("Smallest number in list: ", maximum(values), "\n")  # output smallest number in list
+print("Mean of numbers in list: ", mean(values), "\n")  # output the mean of all values in list

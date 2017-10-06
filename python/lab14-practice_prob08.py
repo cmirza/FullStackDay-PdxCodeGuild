@@ -8,9 +8,9 @@ def reverse(nums):  #define reverse funcion
     rev_nums = []  # define reverse list
     for num in nums:  # start for loop
         rev_nums.insert(0, num)  # use insert method to insert each number in sequence into the 0 position of reversed list
-    print(rev_nums)
+    print(rev_nums)  # output reversed list
 
 
-values = [1, 12, 2, 53, 23, 6, 17]
+values = [1, 12, 2, 53, 23, 6, 17]  # list of values
 
-reverse(values)
+reverse(values)  # pass list to function
