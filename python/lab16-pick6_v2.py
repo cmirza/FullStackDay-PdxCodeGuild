@@ -1,5 +1,6 @@
 '''
 Lab 15 - Pick6
+With ROI
 '''
 
 import random  # import random module
@@ -34,5 +35,8 @@ for plays in range (100000):
     plays += 1
 
 expenses = plays*2
+ROI = (payout-expenses)/expenses
 
 print("You made $"+str(payout-expenses)+" playing Powerball\n")
+
+print("Your ROI is $"+str(ROI))
