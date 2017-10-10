@@ -12,7 +12,7 @@ chosen_numbers = []  # define list of chosen numbers
 for comp_nums in range(5):  # randomly choose 6 numbers
     chosen_numbers.append(random.randint(1, 99))  # choose random number between 1 and 99 and add it to list of chosen numbers
 
-for plays in range (100000):  # run game 100,000 times
+for plays in range(100000):  # run game 100,000 times
     played_numbers = []  # define list of played numbers
     for user_nums in range(5):  # randomly choose 6 numbers
         played_numbers.append(random.randint(1, 99))  # choose random number between 1 and 99 and add it to list of played numbers
@@ -25,14 +25,14 @@ for plays in range (100000):  # run game 100,000 times
         payout += 7
     if matches == 3:  # if 3 matches, 100 payout
         payout += 100
-    if matches == 4:
-        payout += 50000  # if 4 matches, 50000 payout
-    if matches == 5:
-        payout += 1000000  # if 5 matches, 1000000 payout
-    if matches == 6:
-        payout += 25000000  # if 6 matches, 25000000 payout
+    if matches == 4:  # if 4 matches, 50000 payout
+        payout += 50000
+    if matches == 5:  # if 5 matches, 1000000 payout
+        payout += 1000000
+    if matches == 6:  # if 6 matches, 25000000 payout
+        payout += 25000000
     plays += 1  # iterate number of plays
 
 expenses = plays*2  # expenses are number of plays * $2
 
-print("You made $"+str(payout-expenses)+" playing Powerball\n")  # print out payout minus expenses
+print("You made $"+str(payout-expenses)+" playing Powerball\n")  # print  payout minus expenses
