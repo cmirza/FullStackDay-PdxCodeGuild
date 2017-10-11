@@ -34,5 +34,9 @@ def ccv(num):
         return"Invalid Credit Card Number."
 
 
+# prompt for input, check number length and pass to function
 number = input('Enter a Credit Card Number: ')
-print(ccv(number))
+if len(number) != 16:
+    print("Invalid Credit Card Number.")
+else:
+    print(ccv(number))
