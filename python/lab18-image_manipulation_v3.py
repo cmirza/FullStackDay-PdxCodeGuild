@@ -3,18 +3,20 @@ Lab 18 - Image Manipulation
 Use the Pillow library to draw a stick figure.
 '''
 
-from PIL import Image, ImageDraw # import Image and ImageDraw library from Pillow
+# import Image and ImageDraw library from Pillow
+from PIL import Image, ImageDraw
 
 # set canvas size to 500 x 500 pixels
 width = 500
 height = 500
 
-img = Image.new('RGB', (width, height))  # set img as new image
+# set img as new image
+img = Image.new('RGB', (width, height))
 
-draw = ImageDraw.Draw(img)  # define draw variable
+# define draw variable
+draw = ImageDraw.Draw(img)
 
 # draw white rectangle for background
-
 draw.rectangle(((0, 0), (width, height)), fill="white")
 
 # draw pink lines for arms and legs
@@ -33,4 +35,5 @@ draw.ellipse((circle_x-circle_radius, circle_y-circle_radius, circle_x+circle_ra
 # draw blue rectangle for torso
 draw.rectangle(((200, 150), (300, 350)), fill="lightblue")
 
-img.show()  # display image
+# display image
+img.show()

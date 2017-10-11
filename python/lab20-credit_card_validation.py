@@ -3,6 +3,7 @@ Lab 20 - Credit Card Validation
 '''
 
 
+# define ccv function
 def ccv(num):
     # convert string into list of ints
     num = list(num)
