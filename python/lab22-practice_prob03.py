@@ -16,7 +16,7 @@ def find_pair(nums, target):  # define find_pair function
             chkd_nums.append(num)  # add number to checked number list
 
 
-nums_list = [5, 6, 2, 3]  # define number list
+nums_list = [4, 6, 2, 3]  # define number list
 
 target_num = 7  # define target number
 
