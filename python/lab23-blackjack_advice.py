@@ -23,16 +23,25 @@ while True:
     card_1 = input('What\'s your first card? ')
     if card_1 == 'done':
         break
+    elif card_1 not in card_values:
+        print("Invalid card.")
+        continue
     else:
         pass
     card_2 = input('What\'s your second card? ')
     if card_2 == 'done':
         break
+    elif card_2 not in card_values:
+        print("Invalid card.")
+        continue
     else:
         pass
     card_3 = input('What\'s your third card? ')
     if card_3 == 'done':
         break
+    elif card_3 not in card_values:
+        print("Invalid card.")
+        continue
     else:
         pass
     black_jack(card_1, card_2, card_3)
