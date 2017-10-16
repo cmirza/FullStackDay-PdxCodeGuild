@@ -11,7 +11,7 @@ import time
 def random_list(n):
     generated_list = []
     for i in range(n):
-        generated_list.append(random.randint(0,100))
+        generated_list.append(random.randint(0, 100))
     return generated_list
 
 
