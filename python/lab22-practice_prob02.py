@@ -7,7 +7,7 @@ Problem 2: Print out every other element of a list, first using a while loop, th
 def print_every_other_while(num):  # define while loop function
     new_num = []  # define new number list
     i = 0  # define iterator
-    while i in range(len(num)):  # while iterator is in range of the length of number list
+    while i < len(num):  # while iterator is in range of the length of number list
         new_num.append(num[i])  # append number to new number list
         i += 2  # iterate by two
     print(new_num)  # print new list

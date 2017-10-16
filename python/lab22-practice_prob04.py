@@ -7,7 +7,7 @@ Problem 4: Get a string from the user, print out another string, doubling every 
 def char_doublr(input):  # define character doubler function
 
     input_double = ""  # define string for doubled output
-    for i in range (len(input)):  # start loop for length of chars in string
+    for i in range(len(input)):  # start loop for length of chars in string
         input_double += input[i]*2  # add each character in input to input double, twice
     return input_double  # return doubled string
 
