@@ -25,11 +25,11 @@ def ccv(num):
         if num[i] > 9:
             num[i] = num[i]-9
     # sum elements of the list
-    sum = 0
+    total = 0
     for i in num:
-        sum += num[i-1]
+        total += num[i-1]
     # compare second digit of sum to check digit and return result
-    if chk_digit == (sum % 10):
+    if chk_digit == (total % 10):
         return "Valid Credit Card Number."
     else:
         return"Invalid Credit Card Number."
