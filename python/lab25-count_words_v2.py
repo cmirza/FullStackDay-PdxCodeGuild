@@ -11,6 +11,7 @@ with open('alices_adventures_in_wonderland.txt', 'r') as f:
         contents = contents.replace(char, '')
     contents = contents.lower()
     contents = contents.split()
+    f.close()
 
 pair_set = {}  # define dictionary for word pairs
 
