@@ -4,7 +4,7 @@ Lab 26 - Compute Automated Readability Index
 
 import math
 
-# Open text file to read, set to contents and lowercase all chars
+# Open text file to read, set to contents, lowercase all chars, remove all punctuation chars, replace !? with periods
 with open('alices_adventures_in_wonderland.txt', 'r') as f:
     contents = f.read()
     contents = contents.lower()
@@ -15,26 +15,27 @@ with open('alices_adventures_in_wonderland.txt', 'r') as f:
     for char in '!?':
         contents = contents.replace(char, '.')
 
-# # loop through characters in string and count for every alpha or numerical char
+# loop through characters in string and count for every alpha or numerical char
 ari_chars = 0
 characters = 'abcdefghijklmnoqrstuvwxyz1234567890'
 for char in contents:
     if char in characters:
         ari_chars += 1
 
-# split words on whitespace in contents, get length of list for word list
+# split words on whitespace in contents, get length of list for word count
 words = contents.split()
 ari_words = len(words)
 
-# loop through characters in string and count for every .?! to count sentences
+# split sentences on periods in contents, get length of list for sentences count
 sentences = contents.split('.')
 ari_sentences = len(sentences)
 
-
+# print character, word and sentence count
 print('Characters:\t', ari_chars)
 print('Words:\t\t', ari_words)
 print('Sentences:\t', ari_sentences)
 
+# dictionary for ARI scale
 ari_scale = {
      1: {'ages':   '5-6', 'grade_level': 'Kindergarten'},
      2: {'ages':   '6-7', 'grade_level':    '1st Grade'},
@@ -52,11 +53,8 @@ ari_scale = {
     14: {'ages': '18-22', 'grade_level':      'College'}
 }
 
+# calculate ARI score
 ARI = int(math.ceil(4.71 * (ari_chars / ari_words) + 0.5 * (ari_words / ari_sentences) - 21.43))
 
-
+# print output
 print(' --------------------------------------------------------\n', 'The ARI for', f.name, 'is', ARI, '\n This corresponds to a', ari_scale[ARI]['grade_level'], 'of difficulty', '\n that is suitable for an average person', ari_scale[ARI]['ages'], 'years old.\n', '--------------------------------------------------------')
-
-
-
-#    grade_level)
