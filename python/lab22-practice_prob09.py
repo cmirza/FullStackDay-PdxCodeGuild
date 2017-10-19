@@ -17,5 +17,5 @@ def count_hi(hi_hi):
 # Prompt for repeating 'hi's.
 input_hi = input("Type 'hihihi...': ")
 
-# Pass input word to function and print result
+# Pass input string to function and print result
 print(count_hi(input_hi))

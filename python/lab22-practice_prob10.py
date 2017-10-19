@@ -25,5 +25,5 @@ def cat_dog(cats_dogs):
 # Prompt for alternating 'cat' and 'dog'.
 input_cd = input("Type 'catdogcatdog...': ")
 
-# Pass input word to function and print result
+# Pass input string to function and print result
 print(cat_dog(input_cd))
