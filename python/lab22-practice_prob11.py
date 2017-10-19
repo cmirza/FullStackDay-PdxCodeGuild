@@ -24,6 +24,6 @@ def eveneven(nums):
 num_list_1 = [5, 6, 2]
 num_list_2 = [5, 5, 2]
 
-# Pass input word to function and print result
+# Pass input lists to function and print result
 print(eveneven(num_list_1))
 print(eveneven(num_list_2))
