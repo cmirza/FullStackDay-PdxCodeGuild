@@ -17,7 +17,7 @@ def fibonacci(length):
 
 
 # prompt for length of Fibonacci sequence wanted
-num = int(input("How long of a Fibonacci sequence do you want: "))
+input_num = int(input("How long of a Fibonacci sequence do you want: "))
 
 # Pass input number to function and print result
-print(fibonacci(num))
+print(fibonacci(input_num))
