@@ -4,8 +4,8 @@ Problem 6: Write a function that takes two ints, a and b, and returns True if on
 '''
 
 
-# If both num1 and num2 are greater than or equal to zero, return false. If both num1 and num2 are less than 0, return
-# false. Otherwise, return true.
+# Opposite function - If both num1 and num2 are greater than or equal to zero, return false. If both num1 and num2 are
+# less than 0, return false. Otherwise, return true.
 def opposite(num1, num2):
     if num1 >= 0 and num2 >= 0:
         return False
