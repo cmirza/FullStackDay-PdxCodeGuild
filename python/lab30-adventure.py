@@ -2,6 +2,7 @@
 Lab 30 - Adventure
 • use more succinct commands (l/u/d/r)
 • add boundaries to the map, when the player attempts to move beyond the boundary, stop them
+• use different unicode characters
 '''
 
 import random
@@ -21,11 +22,17 @@ for i in range(height):  # loop over the rows
 player_i = 4
 player_j = 4
 
+# player score
+enemies_slain = 0
+
+# boss life
+boss_life = 0
+
 # add 4 enemies in random locations
 for i in range(4):
     enemy_i = random.randint(0, height - 1)
     enemy_j = random.randint(0, width - 1)
-    board[enemy_i][enemy_j] = '§'
+    board[enemy_i][enemy_j] = 'ο'
 
 # loop until the user says 'done' or dies
 while True:
@@ -41,7 +48,7 @@ while True:
         else:
             player_j -= 1  # move left
     elif command == 'r':
-        if player_j > 8:   # catch if player tries to go beyond right boundary of board
+        if player_j > 9:   # catch if player tries to go beyond right boundary of board
             print('you\'ve reached the end of this world!')
             pass
         else:
@@ -53,7 +60,7 @@ while True:
         else:
             player_i -= 1  # move up
     elif command == 'd':
-        if player_i > 8:    # catch if player tries to go beyond bottom boundary of board
+        if player_i > 9:    # catch if player tries to go beyond bottom boundary of board
             print('you\'ve reached the end of this world!')
             pass
         else:
@@ -63,25 +70,43 @@ while True:
 
 
     # check if the player is on the same space as an enemy
-    if board[player_i][player_j] == '§':
+    if board[player_i][player_j] == 'ο':
         print('you\'ve encountered an enemy!')
         action = input('what will you do? ')
         if action == 'attack':
             print('you\'ve slain the enemy')
+            enemies_slain += 1
             board[player_i][player_j] = ' '  # remove the enemy from the board
         else:
             print('you hestitated and were slain')
             break
 
+    # once all enemies have been slayed, reveal final boss
+    if enemies_slain == 4:
+        enemy_i = random.randint(0, height - 1)
+        enemy_j = random.randint(0, width - 1)
+        board[enemy_i][enemy_j] = 'Ω'
+        enemies_slain = 0
 
+
+    if board[player_i][player_j] == 'Ω':
+        print('you\'ve encountered the Final Boss!')
+        action = input('what will you do? ')
+        if action == 'attack':
+            print('you\'ve slain the Final Boss')
+            boss_life += 1
+            board[player_i][player_j] = ' '  # remove the enemy from the board
+        else:
+            print('you hestitated and were slain')
+            break
 
             # print out the board
     for i in range(height):
         for j in range(width):
             # if we're at the player location, print the player icon
             if i == player_i and j == player_j:
-                print('☺', end=' ')
+                print('Δ', end=' ')
             else:
                 print(board[i][j], end=' ')  # otherwise print the board square
         print()
-    print(player_i, player_j)
+    print('Slays: ',enemies_slain)
