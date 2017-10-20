@@ -27,13 +27,10 @@ player_j = 4
 
 # player score
 enemies_slain = 0
-enemies_counter = 0
+enemies_counter = 0  # separate score to trigger final boss
 
 # player life
 player_life = 5
-
-# boss life
-boss_life = 3
 
 # add 4 enemies in random locations
 for i in range(4):
@@ -55,7 +52,7 @@ while True:
         else:
             player_j -= 1  # move left
     elif command == 'r':
-        if player_j > 9:   # catch if player tries to go beyond right boundary of board
+        if player_j > 8:   # catch if player tries to go beyond right boundary of board
             print('you\'ve reached the end of this world!')
             pass
         else:
@@ -67,14 +64,11 @@ while True:
         else:
             player_i -= 1  # move up
     elif command == 'd':
-        if player_i > 9:    # catch if player tries to go beyond bottom boundary of board
+        if player_i > 8:    # catch if player tries to go beyond bottom boundary of board
             print('you\'ve reached the end of this world!')
             pass
         else:
             player_i += 1  # move down
-
-    # check if the player is has reached the boundary of the map
-
 
     # check if the player is on the same space as an enemy
     if board[player_i][player_j] == 'ο':
@@ -98,7 +92,6 @@ while True:
         enemy_j = random.randint(0, width - 1)
         board[enemy_i][enemy_j] = 'Ω'
         enemies_counter = 0
-
 
     if board[player_i][player_j] == 'Ω':
         print('you\'ve encountered the Final Boss!')
