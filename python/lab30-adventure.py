@@ -1,6 +1,7 @@
 '''
 Lab 30 - Adventure
 • use more succinct commands (l/u/d/r)
+• add boundaries to the map, when the player attempts to move beyond the boundary, stop them
 '''
 
 import random
