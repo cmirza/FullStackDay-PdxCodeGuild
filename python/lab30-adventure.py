@@ -8,9 +8,6 @@ Lab 30 - Adventure
 • add player score
 • add hidden treasure, make the objective to find all the treasure
 • add a final boss
-- fog of war
-- enemies move around
-- encounter complexity
 '''
 
 import random
