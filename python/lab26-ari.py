@@ -8,12 +8,10 @@ import math
 with open('alices_adventures_in_wonderland.txt', 'r') as f:
     contents = f.read()
     contents = contents.lower()
-    for char in "\n":  # replace new line with space
-        contents = contents.replace(char, ' ')
+    contents = contents.replace('\n', ' ')
+    contents = contents.replace('!?', '.')
     for char in ''',/\;:\"{}[]&@#$%^*()’‘'&-''':  # remove punctuation chars
         contents = contents.replace(char, '')
-    for char in '!?':
-        contents = contents.replace(char, '.')
 
 # loop through characters in string and count for every alpha or numerical char
 ari_chars = 0
