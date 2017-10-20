@@ -3,6 +3,8 @@ Lab 30 - Adventure
 • use more succinct commands (l/u/d/r)
 • add boundaries to the map, when the player attempts to move beyond the boundary, stop them
 • use different unicode characters
+• add player health
+• add a final boss
 '''
 
 import random
@@ -24,6 +26,9 @@ player_j = 4
 
 # player score
 enemies_slain = 0
+
+# player life
+player_life = 5
 
 # boss life
 boss_life = 0
@@ -77,9 +82,12 @@ while True:
             print('you\'ve slain the enemy')
             enemies_slain += 1
             board[player_i][player_j] = ' '  # remove the enemy from the board
-        else:
-            print('you hestitated and were slain')
-            break
+        if action != 'attack':
+            player_life -= 1
+            print('you hestitated and took a hit!')
+            if player_life < 1:
+                print('...and were slain!')
+                break
 
     # once all enemies have been slayed, reveal final boss
     if enemies_slain == 4:
@@ -97,7 +105,7 @@ while True:
             boss_life += 1
             board[player_i][player_j] = ' '  # remove the enemy from the board
         else:
-            print('you hestitated and were slain')
+            print('you hestitated and were slain!')
             break
 
             # print out the board
@@ -109,4 +117,5 @@ while True:
             else:
                 print(board[i][j], end=' ')  # otherwise print the board square
         print()
-    print('Slays: ',enemies_slain)
+    print('Slays: ', enemies_slain)
+    print('Life: ', player_life)
