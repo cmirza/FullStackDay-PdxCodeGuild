@@ -4,6 +4,7 @@ Lab 30 - Adventure
 • add boundaries to the map, when the player attempts to move beyond the boundary, stop them
 • use different unicode characters
 • add player health
+• add player score
 • add a final boss
 '''
 
@@ -26,12 +27,13 @@ player_j = 4
 
 # player score
 enemies_slain = 0
+enemies_counter = 0
 
 # player life
 player_life = 5
 
 # boss life
-boss_life = 0
+boss_life = 3
 
 # add 4 enemies in random locations
 for i in range(4):
@@ -78,11 +80,12 @@ while True:
     if board[player_i][player_j] == 'ο':
         print('you\'ve encountered an enemy!')
         action = input('what will you do? ')
-        if action == 'attack':
+        if action == 'a':
             print('you\'ve slain the enemy')
             enemies_slain += 1
+            enemies_counter += 1
             board[player_i][player_j] = ' '  # remove the enemy from the board
-        if action != 'attack':
+        if action != 'a':
             player_life -= 1
             print('you hestitated and took a hit!')
             if player_life < 1:
@@ -90,23 +93,25 @@ while True:
                 break
 
     # once all enemies have been slayed, reveal final boss
-    if enemies_slain == 4:
+    if enemies_counter == 4:
         enemy_i = random.randint(0, height - 1)
         enemy_j = random.randint(0, width - 1)
         board[enemy_i][enemy_j] = 'Ω'
-        enemies_slain = 0
+        enemies_counter = 0
 
 
     if board[player_i][player_j] == 'Ω':
         print('you\'ve encountered the Final Boss!')
         action = input('what will you do? ')
-        if action == 'attack':
-            print('you\'ve slain the Final Boss')
-            boss_life += 1
-            board[player_i][player_j] = ' '  # remove the enemy from the board
-        else:
-            print('you hestitated and were slain!')
+        if action == 'a':
+            print('you\'ve slain the Final Boss!')
             break
+        if action != 'a':
+            player_life -= 1
+            print('you hestitated and took a hit!')
+            if player_life < 1:
+                print('...and were slain!')
+                break
 
             # print out the board
     for i in range(height):
