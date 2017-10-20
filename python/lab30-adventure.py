@@ -2,6 +2,7 @@
 Lab 30 - Adventure
 • use more succinct commands (l/u/d/r)
 • add boundaries to the map, when the player attempts to move beyond the boundary, stop them
+• make what's printed on the screen a part of a much larger map
 • use different unicode characters
 • add player health
 • add player score
@@ -10,8 +11,8 @@ Lab 30 - Adventure
 
 import random
 
-width = 10  # the width of the board
-height = 10  # the height of the board
+width = 20  # the width of the board
+height = 20  # the height of the board
 
 # create a board with the given width and height
 # we'll use a list of list to represent the board
@@ -52,7 +53,7 @@ while True:
         else:
             player_j -= 1  # move left
     elif command == 'r':
-        if player_j > 8:   # catch if player tries to go beyond right boundary of board
+        if player_j > 18:   # catch if player tries to go beyond right boundary of board
             print('you\'ve reached the end of this world!')
             pass
         else:
@@ -64,7 +65,7 @@ while True:
         else:
             player_i -= 1  # move up
     elif command == 'd':
-        if player_i > 8:    # catch if player tries to go beyond bottom boundary of board
+        if player_i > 18:    # catch if player tries to go beyond bottom boundary of board
             print('you\'ve reached the end of this world!')
             pass
         else:
@@ -115,5 +116,5 @@ while True:
             else:
                 print(board[i][j], end=' ')  # otherwise print the board square
         print()
-    print('Slays: ', enemies_slain)
-    print('Life: ', player_life)
+    print('Slays:', enemies_slain)
+    print('Life:', player_life)
