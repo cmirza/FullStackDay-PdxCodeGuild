@@ -8,6 +8,7 @@ Lab 30 - Adventure
 • add player score
 • add hidden treasure, make the objective to find all the treasure
 • add a final boss
+• encounter complexity
 '''
 
 import random
@@ -82,18 +83,28 @@ while True:
 
     # check if the player is on the same space as an enemy
     if board[player_i][player_j] == 'ο':
-        print('you\'ve encountered an enemy!')
+        print('you\'ve encountered an enemy! (a)ttack or (t)alk')
         action = input('what will you do? ')
         if action == 'a':
             print('you\'ve slain the enemy')
             enemies_slain += 1
             enemies_counter += 1
             board[player_i][player_j] = ' '  # remove the enemy from the board
-        if action != 'a':
+        if action == 't':
+            enemy_outcome = random.randint(0,1)
+            if enemy_outcome is 0:
+                player_life -= 1
+                print('talk is cheap, you took a hit!')
+                if player_life < 1:
+                    print('...and have been slain!')
+                    break
+            else:
+                    print('You talked it out.')
+        elif action != 't' or action != 'a':
             player_life -= 1
-            print('you hestitated and took a hit!')
+            print('you hesitated and took a hit!')
             if player_life < 1:
-                print('...and were slain!')
+                print('...and have been slain!')
                 break
 
     # check if the player is on the same space as treasure
@@ -107,13 +118,13 @@ while True:
 
     # once all enemies have been slayed, reveal final boss
     if enemies_counter == 4:
-        enemy_i = random.randint(0, height - 1)
-        enemy_j = random.randint(0, width - 1)
-        board[enemy_i][enemy_j] = 'Ω'
+        boss_i = random.randint(0, height - 1)
+        boss_j = random.randint(0, width - 1)
+        board[boss_i][boss_j] = 'Ω'
         enemies_counter = 0
 
     if board[player_i][player_j] == 'Ω':
-        print('you\'ve encountered the Final Boss!')
+        print('you\'ve encountered the Final Boss! (a)ttack or (t)alk')
         action = input('what will you do? ')
         if action == 'a':
             print('you\'ve slain the Final Boss!')
@@ -121,7 +132,13 @@ while True:
             if player_goals == 2:
                 print('you\'ve beaten then game!')
                 break
-        if action != 'a':
+        if action == 't':
+            print('talk is cheap, you took a hit!')
+            player_life -= 1
+            if player_life < 1:
+                print('...and were slain!')
+                break
+        elif action != 't' or action != 'a':
             player_life -= 1
             print('you hesitated and took a hit!')
             if player_life < 1:
