@@ -8,6 +8,9 @@ Lab 30 - Adventure
 • add player score
 • add hidden treasure, make the objective to find all the treasure
 • add a final boss
+- fog of war
+- enemies move around
+- encounter complexity
 '''
 
 import random
@@ -123,7 +126,7 @@ while True:
                 break
         if action != 'a':
             player_life -= 1
-            print('you hestitated and took a hit!')
+            print('you hesitated and took a hit!')
             if player_life < 1:
                 print('...and were slain!')
                 break
