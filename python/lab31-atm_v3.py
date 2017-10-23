@@ -25,10 +25,7 @@ class ATM:
     # Set check withdrawal function which checks if the balance minus the amount to withdraw is greater than zero.
     # If it is, return true, otherwise return false.
     def check_withdrawal(self, amount):
-        if self.balance - amount > 0:
-            return True
-        else:
-            return False
+        return amount > self.balance
 
     # Set withdraw function which first uses check_withdrawal to see if balance will be greater than zero. If true,
     # it subtracts the amount from balance and sets the new sum as balance. Otherwise it returns an error.
