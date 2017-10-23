@@ -45,5 +45,6 @@ class ATM:
         interest = self.balance * .1
         return interest
 
+    # set transaction function, takes each list item in transactions list, joins at newline and returns as string
     def print_transactions(self):
         return "\n".join(self.transactions)
