@@ -5,6 +5,9 @@ Lab 31 - ATM
 
 # ATM class
 class ATM:
+    # define transaction list
+    transactions = []
+
     # Set __init__ function and set balance to zero
     def __init__(self):
         self.balance = 0
@@ -16,6 +19,7 @@ class ATM:
     # Set deposit function which adds deposit amount to balance and set balance as sum, then returns balance
     def deposit(self, amount):
         self.balance += amount
+        self.transactions.append('user deposited $' + str(amount))
         return self.balance
 
     # Set check withdrawal function which checks if the balance minus the amount to withdraw is greater than zero.
@@ -31,6 +35,7 @@ class ATM:
     def withdraw(self, amount):
         if self.check_withdrawal(amount) is True:
             self.balance -= amount
+            self.transactions.append('user withdrew $' + str(amount))
             return self.balance
         else:
             return "Withdrawal exceeds balance."
@@ -39,3 +44,28 @@ class ATM:
     def calc_interest(self):
         interest = self.balance * .1
         return interest
+
+    def print_transactions(self):
+        return "\n".join(self.transactions)
+
+
+# set ATM class to money
+money = ATM()
+
+# REPL loop
+while True:
+    u_input = input('Would you like to do (d)eposit, (w)ithdraw, check (b)alance, (h)istory or (exit): ')
+    if u_input == 'd':
+        amount = int(input('How much would you like to deposit? $'))
+        money.deposit(amount)
+    elif u_input == 'w':
+        amount = int(input('How much would you like to withdraw? $'))
+        money.withdraw(amount)
+    elif u_input == 'b':
+        print('Balance is $' + str(money.check_balance()))
+    elif u_input == 'h':
+        print(money.print_transactions())
+    elif u_input == 'exit':
+        break
+    else:
+        print('Invalid input.')
