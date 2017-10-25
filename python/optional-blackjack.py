@@ -37,6 +37,9 @@ class Deck:
     def __len__(self):
         return len(self.cards)
 
+    def draw_card:
+
+
 
 deck = Deck()
 
