@@ -51,47 +51,43 @@ def most_rain(dates):
     return rain_day
 
 
-# rainiest year function, for each day in list of data, check if less than current year. If so, divide sum of rain for
-# that year by number of days to get that years average. Then create new dict entry with current year as key and rain
-# average as value. Otherwise iterate number of days, add amount of rain to rain total and set current year value. Once
-# the loop finishes, create one more dictionary entry for the last year in list.
-# then iterate over dictionary, check if the current entry's value is greater than the maximum value so far. If it is,
-# assign key and value to variables. When done, return those variables.
+# rainiest year function, loops over rain data and creates a list of years measured and lists for totals, number of
+# days and averages with the same number of entries. While looping over the length of the list of years, count the
+# totals for each year and number of days, then calculate average for year. Then find highest average in list and year
+# with corresponding index. Then return max year and max average.
 def year_rain(dates):
-    rain_avgs = {}
-    current_year = 0
-    num_days = 0
-    sum_rain = 0
+
+    years = []
+    totals = []
+    num_days = []
+    averages = []
 
     for day in dates:
-        if day[0].year < current_year:
-            rain_year = sum_rain/num_days
-            rain_avgs[current_year] = rain_year
-            num_days = 0
-            sum_rain = 0
-        num_days += 1
-        sum_rain += int(day[1])
-        current_year = day[0].year
-    rain_year = sum_rain / num_days
-    rain_avgs[current_year] = rain_year
+        if day[0].year not in years:
+            years.append(day[0].year)
+            totals.append(0)
+            num_days.append(0)
+            averages.append(0)
 
-    max_rain = 0
-    max_year = 0
+    for i in range(len(years)):
+        for day in dates:
+            if day[0].year == years[i]:
+                totals[i] += int(day[1])
+                num_days[i] += 1
+        averages[i] = totals[i]/num_days[i]
 
-    for year, rain in rain_avgs.items():
-        if rain > max_rain:
-            max_rain = rain
-            max_year = year
-    return max_year, max_rain
+    max_average = max(averages)
+    max_year = years[averages.index(max_average)]
+    return max_year, max_average
 
 
 # assign list of data to weather_data variable
 weather_data = load_date()
 
-weather_avg = average(weather_data) # pass weather data to average function and assign result to variable
+weather_avg = average(weather_data)  # pass weather data to average function and assign result to variable
 weather_var = variance(weather_data, weather_avg) # pass weather data to variance function and assign result to variable
-rainiest_day = most_rain(weather_data) # pass weather data to most rain function and assign result to variable
-rainiest_year = year_rain(weather_data) # pass weather data to rainiest year function and assign result to variable
+rainiest_day = most_rain(weather_data)  # pass weather data to most rain function and assign result to variable
+rainiest_year = year_rain(weather_data)  # pass weather data to rainiest year function and assign result to variable
 
 # print out results
 print('Average rainfall: ' + str(weather_avg))
