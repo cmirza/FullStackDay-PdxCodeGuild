@@ -37,11 +37,42 @@ class Deck:
     def __len__(self):
         return len(self.cards)
 
-    def draw_card:
+    def draw_card(self):
+        return self.cards.pop()
 
+
+class Hand:
+    def __init__(self):
+        self.cards = []
+
+    # add card to hand
+    def in_hand(self, cards):
+        self.cards.append(card)
+
+    def print_cards(self):
+        for card in self.cards:
+            print(card)
+
+    def hand_value(self):
+        for card in self.cards:
+            val = card.value()
+            hand_total =
 
 
 deck = Deck()
+deck.shuffle()
+deck.cut()
 
+hand = Hand()
+deck.draw_card()
+hand.in_hand(card)
+card = deck.draw_card()
+
+
+print('deck' + '-'*40)
 for card in deck.cards:
+    print(card)
+
+print('hand' + '-'*40)
+for card in hand.cards:
     print(card)
