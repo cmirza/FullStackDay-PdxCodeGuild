@@ -1,3 +1,3 @@
 # FullStackDay-PdxCodeGuild
 
-Course work for 20171003 Full-Stack Day Class
+Projects for PDX Code Guild Full-Stack Day Class, October 03-January xx, 2017.
