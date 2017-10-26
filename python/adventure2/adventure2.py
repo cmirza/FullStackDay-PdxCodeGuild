@@ -14,7 +14,6 @@ for i in range(10):
     skeleton = Skeleton(skeleton_i, skeleton_j)
     world.entities.append(skeleton)
 
-
 while True:
     world.draw()
     command = input('what is your command? ').lower()
@@ -30,9 +29,3 @@ while True:
         player.loc_j += 1
     else:
         print('command not recognized')
-
-
-
-
-
-

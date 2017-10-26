@@ -54,20 +54,3 @@ class World:
                 else:
                     print(entities[0].symbol, end='')
             print()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
