@@ -1,6 +1,4 @@
 
-
-
 from entities import Entity
 
 
@@ -19,6 +17,3 @@ class Sword(Item):
 class Shield(Item):
     def __init__(self, loc_i, loc_j, defense_modifier):
         super().__init__('sword', '☨', loc_i, loc_j, 0, defense_modifier)
-
-
-

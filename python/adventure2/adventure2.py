@@ -29,4 +29,3 @@ while True:
         player.loc_j += 1
     else:
         print('command not recognized')
-
