@@ -23,6 +23,7 @@ class World:
     def random_location_unique(self):
         while True:
             i, j = self.random_location()
+
             unique = True
             for entity in self.entities:
                 if entity.loc_i == i and entity.loc_j == j:
