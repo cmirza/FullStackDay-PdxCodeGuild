@@ -1,5 +1,4 @@
 
-
 class Entity:
     def __init__(self, name, symbol, loc_i, loc_j):
         self.name = name
@@ -37,7 +36,3 @@ class Player(LivingEntity):
 class Skeleton(LivingEntity):
     def __init__(self, loc_i, loc_j):
         super().__init__('Skeleton', '☠', loc_i, loc_j, health=3, attack=1, defense=1)
-
-
-
-
