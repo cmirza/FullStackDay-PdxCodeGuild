@@ -29,3 +29,8 @@ while True:
         player.loc_j += 1
     else:
         print('command not recognized')
+
+
+    if player.loc_i == skeleton.loc_i and player.loc_j == skeleton.loc_j:
+        print('encounter')
+
