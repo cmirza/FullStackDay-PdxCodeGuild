@@ -1,0 +1,47 @@
+<html>
+<head>
+    <title>Pick 6</title>
+
+    <script>
+        let payout = 0;
+        let plays = 0;
+
+        let chosen_numbers = [];
+
+        let payouts = [0, 4, 7, 100, 50000, 1000000, 25000000];
+
+        // pick 6 random numbers and add them to chosen numbers array
+        for (let i = 0; i < 6; ++i) {
+            chosen_numbers.push(Math.floor(Math.random() * 100+1));
+        }
+
+        // play game 100000 times
+        for (let i = 0; i < 100000; ++i) {
+
+            // reset played numbers and matches
+            let played_numbers = [];
+            let matches = 0;
+
+            // pick 6 random numbers and add them to played numbers array
+            for (let j = 0; j < 6; ++j) {
+                played_numbers.push(Math.floor(Math.random() * 100+1));
+            }
+
+            // loop over chosen numbers while looping over played numbers to find matches
+            for (let k = 0; k < 6; ++k) {
+                if (chosen_numbers[k] === played_numbers[k]) {
+                    matches += 1;
+                }
+            }
+            // find payout value
+            payout += payouts[matches];
+
+            // iterate number of plays
+            plays += 1;
+        }
+        alert('You made '+(payout-(plays*2))+' playing Powerball.');
+    </script>
+</head>
+<body>
+</body>
+</html>

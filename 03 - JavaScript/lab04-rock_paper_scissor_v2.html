@@ -1,0 +1,67 @@
+<html>
+<head>
+    <title>Rock, paper, scissor!</title>
+
+</head>
+<body>
+
+<script>
+        /* random function */
+        function random_element(array) {
+                let random_index = Math.floor(Math.random()*array.length);
+                return array[random_index];
+        }
+
+        /* array of valid choices */
+        let valid_choice = ['rock', 'paper', 'scissor'];
+
+        /* computer choice, randomly chosen from valid choices */
+        computer_choice = random_element(valid_choice);
+
+        /* prompt user for a choice, lowercase the string */
+        let user_choice = prompt('Rock, Paper or Scissor?');
+        user_choice = user_choice.toLowerCase();
+
+        /* if user choice is rock, give a response depending on computer choice */
+        if (user_choice === 'rock') {
+            if (computer_choice === 'rock') {
+                alert('Rock, it\'s a tie.')
+            }
+            if (computer_choice === 'paper') {
+                alert('Paper, you loose.')
+            }
+            if (computer_choice === 'scissor') {
+                alert('Scissor, you win!')
+            }
+        }
+        /* if user choice is paper, give a response depending on computer choice */
+        else if (user_choice === 'paper') {
+            if (computer_choice === 'rock') {
+                alert('Rock, you win!')
+            }
+            if (computer_choice === 'paper') {
+                alert('Paper, it\'s a tie.')
+            }
+            if (computer_choice === 'scissor') {
+                alert('Scissor, you loose.')
+            }
+        }
+        /* if user choice is scissor, give a response depending on computer choice */
+        else if (user_choice === 'scissor') {
+            if (computer_choice === 'rock') {
+                alert('Rock, you loose.')
+            }
+            if (computer_choice === 'paper') {
+                alert('Paper, you win!')
+            }
+            if (computer_choice === 'scissor') {
+                alert('Scissor, it\'s a tie.')
+            }
+        }
+        /* give error if user choice wasn't valid */
+        else {
+            alert('Invalid choice.')
+        }
+    </script>
+</body>
+</html>

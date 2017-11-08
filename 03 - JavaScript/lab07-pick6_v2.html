@@ -1,0 +1,76 @@
+<html>
+<head>
+    <title>Pick 6</title>
+
+
+<style>
+h1   {color: #000000;}
+</style>
+
+</head>
+<body>
+
+<h2>After 100,000 plays @ $2 a ticket... </h2>
+<p><b id="match0"></b> plays were losers.</p>
+<p><b id="match1"></b> plays were singles.</p>
+<p><b id="match2"></b> plays were dubs.</p>
+<p><b id="match3"></b> plays were trips.</p>
+<p><b id="match4"></b> plays were quads.</p>
+<p><b id="match5"></b> plays were quints.</p>
+<p><b id="match6"></b> plays were sexts.</p>
+<p>You made $<b id="total_pay"></b> playing Powerball!</p>
+<button id="bt" onClick="window.location.reload();">Try Again</button>
+
+<script>
+    let payout = 0;
+    let plays = 0;
+    let chosen_numbers = [];
+    let payouts = [0, 4, 7, 100, 50000, 1000000, 25000000];
+    let match_amount = [0, 0, 0, 0, 0, 0, 0];
+
+    // pick 6 random numbers and add them to chosen numbers array
+    for (let i = 0; i < 6; ++i) {
+        chosen_numbers.push(Math.floor(Math.random() * 100+1));
+    }
+
+    // play game 100000 times
+    for (let i = 0; i < 100000; ++i) {
+
+        // reset played numbers and matches
+        let played_numbers = [];
+        let matches = 0;
+        let matched_numbers = [];
+
+        // pick 6 random numbers and add them to played numbers array
+        for (let j = 0; j < 6; ++j) {
+            played_numbers.push(Math.floor(Math.random() * 100+1));
+        }
+
+        // loop over chosen numbers while looping over played numbers to find matches
+        for (let k = 0; k < 6; ++k) {
+            if (chosen_numbers[k] === played_numbers[k]) {
+                matched_numbers.push(played_numbers[k]);
+                matches += 1;
+            }
+        }
+        // write array to page
+        match_amount[matched_numbers.length] += 1;
+
+        // find payout value
+        payout += payouts[matches];
+
+        // iterate number of plays
+        plays += 1;
+    }
+    // populate page with match data and total payout
+    for (let i = 0; i <= 6; ++i){
+        document.getElementById("match"+[i]).innerText = match_amount[i].toString();
+        let colors = ['#ff0000', '#00ff00', '#0000ff', '#ff05d8', '#00f8ff', '#fffa06', '#ffc7b4', '#479eff', '#ff8c5f'];
+        let rnd_color = colors[Math.floor(Math.random() * colors.length)];
+        document.body.style.backgroundColor = rnd_color;
+    }
+    document.getElementById("total_pay").innerText = (payout-(plays*2)).toLocaleString();
+
+</script>
+</body>
+</html>
