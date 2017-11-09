@@ -1,0 +1,43 @@
+body {
+    background-image: url("http://art.teleportacia.org/observation/vernacular/stars/starry.gif");
+    background-color: black;
+}
+h1 {
+    text-shadow: 2px 4px 10px red;
+}
+h3 {
+    background: linear-gradient(330deg, #e05252 0%, #99e052 25%, #52e0e0 50%, #9952e0 75%, #e05252 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+p {
+    background: linear-gradient(330deg, #e05252 0%, #99e052 25%, #52e0e0 50%, #9952e0 75%, #e05252 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+p.created {
+    font-weight: bold;
+    background: linear-gradient(330deg, #e05252 0%, #99e052 25%, #52e0e0 50%, #9952e0 75%, #e05252 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+blockquote {
+    background: linear-gradient(330deg, #e05252 0%, #99e052 25%, #52e0e0 50%, #9952e0 75%, #e05252 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+table {
+    background: linear-gradient(330deg, #e05252 0%, #99e052 25%, #52e0e0 50%, #9952e0 75%, #e05252 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.pageCenter {
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 1000px;
+	float: none;
+}
+
+img {
+    width: 500px;
+}

@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="style.css"/>
+    </head>
+        <body>
+            <body bgcolor="black">
+            <body text="white">
+                <fieldset>
+                    <legend><b>Login:</b></legend>
+                    <form action="http://example.com/login" method="POST">
+                    User Name:<br>
+                    <input type="text" name="user_name"><br>
+                    Password:<br>
+                    <input type="password" name="pass_word"><br>
+                    <input type="checkbox" name="remember_pass"> Remember user login<br>
+                </fieldset>
+                <br>
+            <fieldset>
+                <legend><b>Newsletter:</b></legend>
+                Recieive newsletter?<br>
+                <input type="radio" name="yes" value="news_yes" checked> Yes<br>
+                <input type="radio" name="no" value="news_no"> No<br>
+                </fieldset>
+                <br>
+            <fieldset>
+                <legend><b>Whats your state:</b></legend>
+                Select state<br>
+                <select name="state">
+                    <option selected value="or">Oregon</option>
+                    <option value="wa">Washington</option>
+                    <option value="ca">California</option>
+                    <option value="id">Idaho</option>
+                    <option value="nv">Nevada</option>
+                </select>
+                </fieldset>
+                <br>
+            <fieldset>
+                <legend><b>Whats your favorite color:</b></legend>
+                <form>
+                  <input type="checkbox" name="color" value="red" checked> Red
+                    <input type="checkbox" name="color" value="blue"> Blue<br>
+                  <input type="checkbox" name="color" value="green"> Green
+                  <input type="checkbox" name="color" value="yellow"> Yellow
+                </form>
+                </fieldset>
+                <br>
+                <button>Submit</button>
+            </form>
+    </body>
+</html>

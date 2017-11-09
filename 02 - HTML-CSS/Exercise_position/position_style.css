@@ -1,0 +1,57 @@
+body {
+	height: 100vh;
+}
+
+div div {
+	width:100px;
+	height:100px;
+	background: #465C69;
+	border-radius:50%;
+    position: relative;
+    top: 10px;
+    left: 20px;
+}
+
+nav {
+	border-bottom: solid;
+	background: #333;
+}
+
+nav > div {
+	height: 120px;
+    position: relative;
+}
+
+h1 {
+	position:absolute;
+	right:20px;
+	top:50%;
+}
+
+nav {
+	width:100%;
+    position:fixed;
+    right:0;
+	top:0;
+
+}
+
+ul {
+	border-right: solid;
+	width: 100px;
+	height: 100%;
+	padding: 10px 0;
+	margin-top: 120px;
+}
+
+ul li:hover {
+	color: #465C69;
+}
+
+img {
+	width: 500px;
+    position: absolute;
+    top:30%;
+	left:25%;
+    z-index: -1;
+}
