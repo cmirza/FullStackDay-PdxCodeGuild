@@ -1,0 +1,77 @@
+<html>
+<head>
+    <title>Make Change</title>
+
+    <style>
+        body {
+            text-align: center;
+        }
+        #container {
+            width: 60%;
+            margin: 0;
+            padding: 20px 20px 40px 20px;
+            text-align: center;
+            border: 1px solid black;
+            display: inline-block;
+        }
+        #change_text {
+            padding-bottom: 10px;
+        }
+        #cash_input {
+            width: 40%;
+        }
+        #example {
+            padding-top: 5px;
+            font-size: .75em;
+            color: darkgrey;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Make Change</h1>
+<div id="container">
+    <div id="change_text" class="blank"></div>
+    <input id='cash_input' type='text' class="normal" placeholder='how much cash do you have?'/>
+    <button id='bt_change'>I Need Change!</button>
+    <div id="example">ex. $12.34</div>
+</div>
+    <script>
+        let cash_input = document.querySelector('#cash_input');
+        let bt_change = document.querySelector('#bt_change');
+
+        // button click function
+        bt_change.onclick = function() {
+            // get cash total
+            let total = cash_input.value;
+
+            // check if amount is a number
+            if (isNaN(total)) {
+                document.getElementById("change_text").innerHTML = 'Not a valid amount.';
+                return;
+            }
+
+            // multiply cash amount by 100 and  turn into integer
+            total = parseInt(total * 100);
+
+            // divide total by 25 and do floor division to get amount of quarters, subtract value of quarters from total
+            let quarters = Math.floor(total / 25);
+            total = total - (quarters * 25);
+
+            // divide total by 10 and do floor division to get amount of dimes, subtract value of dimes from total
+            let dimes = Math.floor(total / 10);
+            total = total - (dimes * 10);
+
+            // divide total by 5 and do floor division to get amount of nickels, subtract value of nickels from total
+            let nickels = Math.floor(total / 5);
+            total = total - (nickels * 5);
+
+            // remaining total is pennies
+            let pennies = total;
+
+            document.getElementById("change_text").innerHTML = quarters + ' quarters, ' + dimes + ' dimes, ' + nickels + ' nickels and ' + pennies + ' pennies.';
+        }
+    </script>
+</body>
+</html>

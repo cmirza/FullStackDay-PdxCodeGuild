@@ -16,6 +16,12 @@
         #credit_card_num {
             width: 40%;
         }
+        #example {
+            padding-top: 5px;
+            font-size: .75em;
+            color: darkgrey;
+            font-style: italic;
+        }
         .normal {
         }
         .standard {
@@ -31,18 +37,18 @@
     </style>
 </head>
 <body>
-
 <h1>Credit Card Validator</h1>
 <div id="container">
-    <div id="advise_text" class="blank"></div>
+    <div id="valid_text" class="blank"></div>
     <input id='credit_card_num' type='text' class="normal" placeholder='enter a credit card number'/>
     <button id='bt_validate'>Check Validation</button>
+    <div id="example">ex. 4556737586899855</div>
 </div>
-
     <script>
         let credit_card_num = document.querySelector('#credit_card_num');
         let bt_validate = document.querySelector('#bt_validate');
 
+        // button click function
         bt_validate.onclick = function() {
 
             // turn string into array
@@ -50,14 +56,14 @@
 
             // check if input has too few or too many digits
             if (cc_num.length < 16) {
-                document.getElementById("advise_text").innerText = 'Not enough digits.';
-                document.getElementById("advise_text").className = "standard";
+                document.getElementById("valid_text").innerText = 'Not enough digits.';
+                document.getElementById("valid_text").className = "standard";
                 document.getElementById("credit_card_num").className = "normal";
                 return;
             }
             if (cc_num.length > 16) {
-                document.getElementById("advise_text").innerText = 'Too many digits.';
-                document.getElementById("advise_text").className = "standard";
+                document.getElementById("valid_text").innerText = 'Too many digits.';
+                document.getElementById("valid_text").className = "standard";
                 document.getElementById("credit_card_num").className = "normal";
                 return;
             }
@@ -92,12 +98,12 @@
 
             // if check digit is equal to second digit of cc_sum, card is valid, otherwise its invalid
             if (chk_digit === (cc_sum % 10)) {
-                document.getElementById("advise_text").innerText = 'Valid Card.';
-                document.getElementById("advise_text").className = "standard";
+                document.getElementById("valid_text").innerText = 'Valid Card.';
+                document.getElementById("valid_text").className = "standard";
                 document.getElementById("credit_card_num").className = "normal";
             } else {
-                document.getElementById("advise_text").innerText = 'Invalid Card!';
-                document.getElementById("advise_text").className = "not_valid";
+                document.getElementById("valid_text").innerText = 'Invalid Card!';
+                document.getElementById("valid_text").className = "not_valid";
                 document.getElementById("credit_card_num").className = "invalid";
             }
 

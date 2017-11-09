@@ -8,19 +8,19 @@
         total = parseInt(total * 100);
 
         /* divide total by 25 and do floor division to get amount of quarters, subtract value of quarters from total*/
-        quarters = Math.floor(total / 25);
+        let quarters = Math.floor(total / 25);
         total = total - (quarters * 25);
 
         /* divide total by 10 and do floor division to get amount of dimes, subtract value of dimes from total*/
-        dimes = Math.floor(total / 10);
+        let dimes = Math.floor(total / 10);
         total = total - (dimes * 10);
 
         /* divide total by 5 and do floor division to get amount of nickels, subtract value of nickels from total*/
-        nickels = Math.floor(total / 5);
+        let nickels = Math.floor(total / 5);
         total = total - (nickels * 5);
 
         /* remaining total is pennies */
-        pennies = total;
+        let pennies = total;
 
         /* print output */
         alert('You have ' + quarters + ' quarters, ' + dimes + ' dimes, ' + nickels + ' nickels and ' + pennies + ' pennies.');

@@ -1,0 +1,75 @@
+<html>
+<head>
+    <title>Simple Calculator</title>
+        <style>
+        body {
+            text-align: center;
+        }
+        #container {
+            width: 60%;
+            margin: 0;
+            padding: 20px 20px 40px 20px;
+            text-align: center;
+            border: 1px solid black;
+            display: inline-block;
+        }
+        #inputs {
+            padding-bottom: 10px;
+        }
+        #example {
+            padding-top: 5px;
+            font-size: .75em;
+            color: darkgrey;
+            font-style: italic;
+        }
+        .nums {
+            width: 50px;
+            text-align: center;
+        }
+        #oper {
+            width: 20px;
+            text-align: center;
+        }
+        .standard {
+            padding-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<h1>Simple Calculator</h1>
+<div id="container">
+    <div id="result" class="blank"></div>
+    <div id="inputs">
+        <input id='num_1' class='nums' type='text'/>
+        <input id='oper' type='text' class="normal" maxlength="1"/>
+        <input id='num_2' class='nums' type='text'/>
+    </div>
+        <button id='bt_calculate'>Calculate</button>
+    <div id="example">Possible operations: +, -, *, %, etc...</div>
+</div>
+
+
+    <script>
+        let bt_calculate = document.querySelector('#bt_calculate');
+
+        bt_calculate.onclick = function() {
+            // get objects from page
+            let num_1 = document.querySelector('#num_1');
+            let num_2 = document.querySelector('#num_2');
+            let oper = document.querySelector('#oper');
+
+            // get values from objects
+            num_1 = num_1.value;
+            num_2 = num_2.value;
+            oper = oper.value;
+
+            // evaluate equation and assign to sum
+            let sum = eval(num_1 + oper + num_2);
+
+            // print output
+            document.getElementById("result").innerHTML = num_1 + ' ' + ' ' + oper + ' ' + num_2 + ' = ' + sum;
+            document.getElementById("result").className = "standard";
+        }
+    </script>
+</body>
+</html>

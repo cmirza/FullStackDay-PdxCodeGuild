@@ -1,66 +1,91 @@
 <html>
 <head>
     <title>Rock, paper, scissor!</title>
+    <style>
+        body {
+            text-align: center;
+        }
+        #container {
+            width: 60%;
+            margin: 0;
+            padding: 20px 20px 40px 20px;
+            text-align: center;
+            border: 1px solid black;
+            display: inline-block;
+        }
+        #result_text {
+            padding-bottom: 10px;
+        }
 
+    </style>
 </head>
 <body>
+<h1>Rock, paper, scissor!</h1>
+<div id="container">
+    <div id="result_text" class="blank"></div>
+    <button id='bt_rock'>Rock</button>
+    <button id='bt_paper'>Paper</button>
+    <button id='bt_scissor'>Scissor</button>
+</div>
 
 <script>
-        /* random function */
+        let bt_rock = document.querySelector('#bt_rock');
+        let bt_paper = document.querySelector('#bt_paper');
+        let bt_scissor = document.querySelector('#bt_scissor');
+
+        // random function
         function random_element(array) {
                 let random_index = Math.floor(Math.random()*array.length);
                 return array[random_index];
         }
 
-        /* array of valid choices */
+        // array of valid choices
         let valid_choice = ['rock', 'paper', 'scissor'];
 
-        /* computer choice, randomly chosen from valid choices */
-        computer_choice = random_element(valid_choice);
+        // if user clicks rock, give a response depending on computer choice
+        bt_rock.onclick = function() {
+            let computer_choice = random_element(valid_choice);
 
-        /* prompt user for a choice, lowercase the string */
-        let user_choice = prompt('Rock, Paper or Scissor?');
-        user_choice = user_choice.toLowerCase();
+            if (computer_choice === 'rock') {
+                document.getElementById('result_text').innerHTML = 'Rock, it\'s a tie.';
+            }
+            if (computer_choice === 'paper') {
+                document.getElementById('result_text').innerHTML = 'Paper, you loose.';
+            }
+            if (computer_choice === 'scissor') {
+                document.getElementById('result_text').innerHTML = '<b>Scissor, you win!</b>';
+            }
 
-        /* if user choice is rock, give a response depending on computer choice */
-        if (user_choice === 'rock') {
+        }
+
+        // if user clicks paper, give a response depending on computer choice
+        bt_paper.onclick = function() {
+            let computer_choice = random_element(valid_choice);
+
             if (computer_choice === 'rock') {
-                alert('Rock, it\'s a tie.')
+                document.getElementById('result_text').innerHTML = '<b>Rock, you win!</b>';
             }
             if (computer_choice === 'paper') {
-                alert('Paper, you loose.')
+                document.getElementById('result_text').innerHTML = 'Paper, it\'s a tie.';
             }
             if (computer_choice === 'scissor') {
-                alert('Scissor, you win!')
+                document.getElementById('result_text').innerHTML = 'Scissor, you loose.';
             }
         }
-        /* if user choice is paper, give a response depending on computer choice */
-        else if (user_choice === 'paper') {
+
+        // if user clicks scissor, give a response depending on computer choice
+        bt_scissor.onclick = function() {
+            let computer_choice = random_element(valid_choice);
+
             if (computer_choice === 'rock') {
-                alert('Rock, you win!')
+                document.getElementById('result_text').innerHTML = 'Rock, you loose.';
             }
             if (computer_choice === 'paper') {
-                alert('Paper, it\'s a tie.')
+                document.getElementById('result_text').innerHTML = '<b>Paper, you win!</b>';
             }
             if (computer_choice === 'scissor') {
-                alert('Scissor, you loose.')
+                document.getElementById('result_text').innerHTML = 'Scissor, it\'s a tie.';
             }
-        }
-        /* if user choice is scissor, give a response depending on computer choice */
-        else if (user_choice === 'scissor') {
-            if (computer_choice === 'rock') {
-                alert('Rock, you loose.')
-            }
-            if (computer_choice === 'paper') {
-                alert('Paper, you win!')
-            }
-            if (computer_choice === 'scissor') {
-                alert('Scissor, it\'s a tie.')
-            }
-        }
-        /* give error if user choice wasn't valid */
-        else {
-            alert('Invalid choice.')
         }
     </script>
 </body>
