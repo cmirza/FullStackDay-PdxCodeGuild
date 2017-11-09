@@ -7,10 +7,10 @@
             text-align: center;
         }
         #container {
-            width:60%;
-            margin:0;
-            padding:20px;
-            text-align:center;
+            width: 60%;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
             border: 1px solid black;
             display: inline-block;
         }
@@ -21,19 +21,18 @@
 </head>
 <body>
 <h1>Pick 6</h1>
-<div id="container">
-<h3>After 100,000 plays @ $2 a ticket... </h3>
-<p><b id="match0"></b> plays were losers.</p>
-<p><b id="match1"></b> plays were singles.</p>
-<p><b id="match2"></b> plays were dubs.</p>
-<p><b id="match3"></b> plays were trips.</p>
-<p><b id="match4"></b> plays were quads.</p>
-<p><b id="match5"></b> plays were quints.</p>
-<p><b id="match6"></b> plays were sexts.</p>
-<p>You made $<b id="total_pay"></b> playing Powerball!</p>
-    <div id="play_again"><button id="bt" onClick="window.location.reload();">Try Again</button></div>
-</div>
-
+    <div id="container">
+        <h3>After 100,000 plays @ $2 a ticket... </h3>
+            <p><b id="match0"></b> plays were losers.</p>
+            <p><b id="match1"></b> plays were singles.</p>
+            <p><b id="match2"></b> plays were dubs.</p>
+            <p><b id="match3"></b> plays were trips.</p>
+            <p><b id="match4"></b> plays were quads.</p>
+            <p><b id="match5"></b> plays were quints.</p>
+            <p><b id="match6"></b> plays were sexts.</p>
+        <p>You made $<b id="total_pay"></b> playing Powerball!</p>
+            <div id="play_again"><button id="bt" onClick="window.location.reload();">Try Again</button></div>
+    </div>
 <script>
     let payout = 0;
     let plays = 0;
@@ -80,7 +79,6 @@
         document.getElementById("match"+[i]).innerText = match_amount[i].toString();
     }
     document.getElementById("total_pay").innerText = (payout-(plays*2)).toLocaleString();
-
 </script>
 </body>
 </html>
