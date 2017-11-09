@@ -1,0 +1,119 @@
+<html>
+<head>
+    <title>Rot 13</title>
+<style>
+body {
+    text-align:center;
+}
+
+#output_table {
+    width:100px;
+    margin: 10px auto;
+}
+
+input {
+    padding:4px;
+}
+
+button {
+    padding:4px;
+}
+
+#overlay {
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    background-color:rgba(0, 0, 0, 0.3);
+    z-index:2;
+}
+
+#inner_overlay {
+    background-color:white;
+    width:80%;
+    height:80%;
+    margin:10%;
+    padding:10px;
+    text-align:center;
+    border: 1px solid black;
+}
+</style>
+</head>
+<body>
+<input id="key_input" type="number" value="13"/>
+<input id="text_input" type="text" placeholder="enter some text"/>
+<button id="encode_bt">encode</button>
+
+<div id="overlay" style="display:none">
+    <div id="inner_overlay">
+        <div id="overlay_text"></div>
+        <button id="bt_overlay_close">close</button>
+    </div>
+</div>
+
+<table id="output_table">
+</table>
+
+<script>
+let text_input = document.querySelector('#text_input');
+let encode_bt = document.querySelector('#encode_bt');
+let key_input = document.querySelector('#key_input');
+let output_table = document.querySelector('#output_table');
+
+let close_bt = document.querySelector('#bt_overlay_close');
+let overlay = document.querySelector('#overlay');
+let overlay_text = document.querySelector('#overlay_text');
+
+close_bt.onclick = function() {
+    overlay.style.display = 'none';
+}
+
+function show_message(message) {
+    overlay_text.innerText = message;
+    overlay.style.display = 'block';
+}
+
+encode_bt.onclick = function() {
+    if (text_input.value === '') {
+    show_message('enter some text!');
+    return;
+    }
+
+    output_table.innerHTML = '';
+
+    let alphabet = 'abcdefghijklmnopqrstuvwxyz';
+    let input = text_input.value;
+    let key = parseInt(key_input.value);
+    let output = '';
+
+    for (let i=0; i<input.length; ++i) {
+        let input_char = input[i];
+        let output_char = '';
+        let index = alphabet.indexOf(input_char);
+        if (index === -1) {
+            output_char = input_char;
+        } else {
+            index += key;
+            index %= alphabet.length;
+            output_char = alphabet[index];
+        }
+
+    output += output_char;
+
+    let tr = document.createElement('tr');
+    let td1 = document.createElement('td');
+    td1.innerText = input[i];
+    let td2 = document.createElement('td');
+    td2.innerText = '->';
+    let td3 = document.createElement('td');
+    td3.innerText = output_char;
+    tr.appendChild(td1);
+    tr.appendChild(td2);
+    tr.appendChild(td3);
+    output_table.appendChild(tr);
+  }
+}
+</script>
+</body>
+</html>

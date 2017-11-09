@@ -1,0 +1,148 @@
+<html>
+<head>
+    <title>Blackjack Adviser</title>
+    <style>
+        @keyframes rainbow{
+	    20%{color: red;}
+	    40%{color: yellow;}
+	    60%{color: green;}
+	    80%{color: blue;}
+	    100%{color: orange;}
+        }
+
+        @keyframes wiggle {
+            0% { transform: rotate(0deg); }
+            20% { transform: rotate(5deg); }
+            40% { transform: rotate(0deg); }
+            60% { transform: rotate(-5deg); }
+            80% { transform: rotate(0deg); }
+            100% { transform: rotate(0deg); }
+        }
+
+        body {
+            text-align:center;
+        }
+
+        #container {
+            width:60%;
+            margin:0;
+            padding:20px;
+            text-align:center;
+            border: 1px solid black;
+            display: inline-block;
+        }
+        #advise {
+            padding: 20px;
+        }
+        .menu {
+            margin-top: 10px;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+        .standard {
+        }
+        .blackjack {
+            animation: rainbow 1s infinite;
+            font-size: 2em;
+        }
+        .busted {
+            animation: wiggle 1s infinite;
+            font-size: 2em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Blackjack Adviser</h1>
+    <div id="container">
+        <div id="advise_text" class="standard"></div>
+    Card 1:
+    <select class="menu" id="card_1">
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="10">Jack</option>
+        <option value="10">Queen</option>
+        <option value="10">King</option>
+        <option value="1">Ace</option>
+    </select>
+
+    Card 2:
+    <select class="menu" id="card_2">
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="10">Jack</option>
+        <option value="10">Queen</option>
+        <option value="10">King</option>
+        <option value="1">Ace</option>
+    </select>
+
+    Card 3:
+    <select class="menu" id="card_3">
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="10">Jack</option>
+        <option value="10">Queen</option>
+        <option value="10">King</option>
+        <option value="1">Ace</option>
+    </select>
+    <div id="advise"><button id="bt_run">Gimme Advice</button></div>
+    </div>
+
+    <script>
+
+        // get values of cards from DOM
+        let card_1 = document.querySelector('#card_1');
+        let card_2 = document.querySelector('#card_2');
+        let card_3 = document.querySelector('#card_3');
+        let bt_run = document.querySelector('#bt_run');
+
+        // card adviser function
+        bt_run.onclick = function () {
+
+            // turn card values into integers and assign to vars
+            let crd1 = parseInt(card_1.value);
+            let crd2 = parseInt(card_2.value);
+            let crd3 = parseInt(card_3.value);
+
+            // add up card values to get total
+            let crd_total = crd1 + crd2 + crd3;
+
+            // if total greater than 21, busted, equal to 21 is blackjack, greater
+            // than or equal to 17 is stay, less than 17 is hit
+            if (crd_total > 21) {
+                document.getElementById("advise_text").innerText = 'Busted!';
+                document.getElementById("advise_text").className = "busted";
+            } else if (crd_total === 21) {
+                document.getElementById("advise_text").innerText = 'Blackjack!';
+                document.getElementById("advise_text").className = "blackjack";
+            } else if (crd_total >= 17) {
+                document.getElementById("advise_text").innerText = 'Stay.';
+                document.getElementById("advise_text").className = "standard";
+            } else if (crd_total < 17) {
+                document.getElementById("advise_text").innerText = 'Hit.';
+                document.getElementById("advise_text").className = "standard";
+            }
+        }
+    </script>
+</body>
+</html>

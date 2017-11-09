@@ -2,15 +2,27 @@
 <head>
     <title>Pick 6</title>
 
-
-<style>
-h1   {color: #000000;}
-</style>
-
+    <style>
+        body {
+            text-align: center;
+        }
+        #container {
+            width:60%;
+            margin:0;
+            padding:20px;
+            text-align:center;
+            border: 1px solid black;
+            display: inline-block;
+        }
+        #play_again {
+            padding: 20px;
+        }
+    </style>
 </head>
 <body>
-
-<h2>After 100,000 plays @ $2 a ticket... </h2>
+<h1>Pick 6</h1>
+<div id="container">
+<h3>After 100,000 plays @ $2 a ticket... </h3>
 <p><b id="match0"></b> plays were losers.</p>
 <p><b id="match1"></b> plays were singles.</p>
 <p><b id="match2"></b> plays were dubs.</p>
@@ -19,7 +31,8 @@ h1   {color: #000000;}
 <p><b id="match5"></b> plays were quints.</p>
 <p><b id="match6"></b> plays were sexts.</p>
 <p>You made $<b id="total_pay"></b> playing Powerball!</p>
-<button id="bt" onClick="window.location.reload();">Try Again</button>
+    <div id="play_again"><button id="bt" onClick="window.location.reload();">Try Again</button></div>
+</div>
 
 <script>
     let payout = 0;
@@ -65,9 +78,6 @@ h1   {color: #000000;}
     // populate page with match data and total payout
     for (let i = 0; i <= 6; ++i){
         document.getElementById("match"+[i]).innerText = match_amount[i].toString();
-        let colors = ['#ff0000', '#00ff00', '#0000ff', '#ff05d8', '#00f8ff', '#fffa06', '#ffc7b4', '#479eff', '#ff8c5f'];
-        let rnd_color = colors[Math.floor(Math.random() * colors.length)];
-        document.body.style.backgroundColor = rnd_color;
     }
     document.getElementById("total_pay").innerText = (payout-(plays*2)).toLocaleString();
 
