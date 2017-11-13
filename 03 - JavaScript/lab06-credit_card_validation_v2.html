@@ -1,0 +1,110 @@
+<!-- Redone with JQuery -->
+<html>
+<head>
+    <title>Credit Card Validator - with JQuery</title>
+    <style>
+        body {
+            text-align: center;
+        }
+        #container {
+            width: 60%;
+            margin: 0;
+            padding: 20px 20px 40px 20px;
+            text-align: center;
+            border: 1px solid black;
+            display: inline-block;
+        }
+        #credit_card_num {
+            width: 40%;
+        }
+        #example {
+            padding-top: 5px;
+            font-size: .75em;
+            color: darkgrey;
+            font-style: italic;
+        }
+        .normal {
+        }
+        .standard {
+            padding-bottom: 10px;
+        }
+        .invalid {
+            border: 2px solid red;
+        }
+        .not_valid {
+            color: red;
+            padding-bottom: 10px;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+</head>
+<body>
+<h1>Credit Card Validator</h1>
+<div id="container">
+    <div id="valid_text"></div>
+    <input id='credit_card_num' type='text' placeholder='enter a credit card number'/>
+    <button id='bt_validate'>Check Validation</button>
+    <div id="example">ex. 4556737586899855</div>
+</div>
+    <script>
+
+        // button click function
+        $("#bt_validate").click(function() {
+
+            // turn string into array
+            let cc_num = $('#credit_card_num').val();
+            cc_num = cc_num.split("");
+
+            // check if input has too few or too many digits
+            if (cc_num.length < 16) {
+                $('#valid_text').text('Not enough digits.').removeClass('not_valid').addClass('standard');
+                $('#credit_card_num').removeClass('invalid').addClass('normal');
+                return;
+            }
+            if (cc_num.length > 16) {
+                $('#valid_text').text('Too many digits.').removeClass('not_valid').addClass('standard');
+                $('#credit_card_num').removeClass('invalid').addClass('normal');
+                return;
+            }
+
+            // pop last digit out of array, into variable
+            let chk_digit = parseInt(cc_num.pop());
+
+            // reverse array
+            let cc_rev = [];
+            for (let i = 0; i < cc_num.length; ++i) {
+                cc_rev.push(cc_num[i]);
+            }
+            cc_num = cc_rev;
+
+            // double every digit in array
+            for (let i = 0; i < cc_num.length; i+=2) {
+                cc_num[i] = cc_num[i]*2;
+            }
+
+            // subtract 9 from values greater than 9
+            for (let i = 0; i < cc_num.length; ++i) {
+                if (cc_num[i] > 9) {
+                    cc_num[i] = (cc_num[i]-9);
+                }
+            }
+
+            // sum values in array
+            let cc_sum = 0;
+            for (let i = 0; i < cc_num.length; ++i) {
+                cc_sum += parseInt(cc_num[i]);
+            }
+
+            // if check digit is equal to second digit of cc_sum, card is valid, otherwise its invalid
+            if (chk_digit === (cc_sum % 10)) {
+                $('#valid_text').text('Valid Card.').removeClass('not_valid').addClass('standard');
+                $('#credit_card_num').removeClass('invalid').addClass('normal');
+            } else {
+                $('#valid_text').text('Invalid Card!').removeClass('standard').addClass('not_valid');
+                $('#credit_card_num').removeClass('normal').addClass('invalid')
+            }
+
+        })
+    </script>
+</body>
+</html>
