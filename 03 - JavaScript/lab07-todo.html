@@ -55,40 +55,51 @@
     </div>
 </div>
     <script>
-
         let to_do_input = document.getElementById('to_do_input');
         let to_do_table = document.getElementById('to_do_table');
         let bt_add_item = document.getElementById('bt_add_item');
 
-
-
-
+        // add item function
         bt_add_item.onclick = function() {
+
+            // get text for list item
             let to_do_item = to_do_input.value;
 
+            // create new row and 3 cells
             let row = to_do_table.insertRow(0);
             let cell1 = row.insertCell(0);
             let cell2 = row.insertCell(1);
             let cell3 = row.insertCell(2);
+
+            // place list item text in first cell
             cell1.innerHTML = to_do_item;
             cell1.className = 'item';
+
+            // add completed button in second cell
             cell2.innerHTML = '<button id=\'bt_complete_item\'>&#10003;</button>';
             cell2.className = 'complete';
+
+            //add delete button in third cell
             cell3.innerHTML = '<button id=\'bt_remove_item\'>&#10007;</button>';
             cell3.className = 'delete';
 
             let bt_remove_item = document.getElementById('bt_remove_item');
             let bt_complete_item = document.getElementById('bt_complete_item');
+
+            // function for completed button, toggles css style for strike through of text
             bt_complete_item.onclick = function() {
                 this.parentNode.previousSibling.classList.toggle('done');
             };
+
+            // function for delete button, goes three levels up from the button and deletes child
             bt_remove_item.onclick = function() {
                 this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);
             };
+
+        // clears text box and returns false to prevent window from refreshing when submitting
         to_do_input.value = '';
         return false
         }
-
     </script>
 </body>
 </html>
