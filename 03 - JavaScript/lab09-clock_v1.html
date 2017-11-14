@@ -1,0 +1,34 @@
+<html>
+<head>
+    <title>Clock</title>
+    <style>
+        body {
+            text-align: center;
+        }
+        #container {
+            width: 60%;
+            margin: 0;
+            padding: 20px 20px 40px 20px;
+            text-align: center;
+            border: 1px solid black;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+<h1>Clock</h1>
+<div id="container">
+    <div id="time"></div>
+</div>
+    <script>
+    // initialize interval for myTimer
+    let time_interval = setInterval(my_timer, 1000);
+
+    // timer function, set new date to d variable, update time div with date and time string
+    function my_timer() {
+        let d = new Date();
+        document.getElementById("time").innerHTML = d.toLocaleDateString() + ' ' + d.toLocaleTimeString();
+    }
+    </script>
+</body>
+</html>

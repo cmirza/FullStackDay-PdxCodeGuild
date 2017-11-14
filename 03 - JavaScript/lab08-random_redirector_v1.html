@@ -1,0 +1,35 @@
+<html>
+<head>
+    <title>Random Redirector</title>
+    <style>
+        body {
+            text-align: center;
+        }
+        #container {
+            width: 60%;
+            margin: 0;
+            padding: 20px 20px 40px 20px;
+            text-align: center;
+            border: 1px solid black;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+<h1>Random Redirector</h1>
+<div id="container">
+    <button id='bt_random'>I feel lucky!</button>
+</div>
+    <script>
+        let bt_random = document.getElementById('bt_random');
+
+        // define array of websites
+        websites = ['http://www.google.com', 'http://www.youtube.com', 'http://www.facebook.com', 'http://www.baidu.com', 'http://www.wikipedia.org', 'http://www.yahoo.com', 'http://www.reddit.com', 'http://www.qq.com', 'http://www.taobao.com', 'http://www.amazon.com', 'http://www.tmall.com', 'http://www.twitter.com']
+
+        // random button function, set window.location to a randomly chosen website
+        bt_random.onclick = function() {
+            window.location = websites[Math.floor(Math.random() * websites.length)];
+        }
+    </script>
+</body>
+</html>

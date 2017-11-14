@@ -1,0 +1,103 @@
+<html>
+<head>
+    <title>Stopwatch</title>
+    <style>
+        body {
+            text-align: center;
+        }
+        #container {
+            width: 60%;
+            margin: 0;
+            padding: 20px 20px 40px 20px;
+            text-align: center;
+            border: 1px solid black;
+            display: inline-block;
+        }
+        #time {
+            padding-bottom: 10px;
+        }
+        #lap_times {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+        }
+        #lap_times ul {
+            text-align: left;
+            display: inline;
+        }
+
+    </style>
+</head>
+<body>
+<h1>Stopwatch</h1>
+<div id="container">
+    <div id="time"></div>
+    <div id="controls">
+        <button id='bt_start'>Start</button>
+        <button id='bt_lap'>Lap</button>
+    </div >
+    <div id="lap_times">
+        <ul id="time_list">
+        </ul>
+    </div>
+</div>
+    <script>
+    // get star and lap button elements from HTML
+    let bt_start = document.getElementById('bt_start');
+    let bt_lap = document.getElementById('bt_lap');
+
+    // create new date variable
+    let d = new Date();
+    // initialize my_timer and lap_counter var and set to 0
+    let my_timer = 0;
+    let lap_counter = 0;
+    // set state of timer to false to prevent lap button from working if timer isn't running
+    let timer_running = false;
+
+    // start timer button
+    bt_start.onclick = function() {
+
+        // set state of timer to true
+        timer_running = true;
+
+        // initialize time to 0 and clear interval of my timer
+        d.setHours(0, 0, 0, 0);
+        clearInterval(my_timer);
+
+        // set interval to 1000ms, at every interval increment seconds by 1, then set time to time element in HTML
+        my_timer = setInterval(function () {
+            d.setSeconds(d.getSeconds() + 1);
+            document.getElementById("time").innerHTML = ('0' + d.getHours()).slice(-2) + ":" + ('0' + d.getMinutes()).slice(-2) + ":" + ('0' + d.getSeconds()).slice(-2);
+        }, 1000);
+    };
+
+    // lap button function
+    bt_lap.onclick = function () {
+
+        // check if timer running is false and do nothing if true, otherwise continue
+        if (timer_running === false){
+
+        } else {
+
+            // increment lap counter
+            lap_counter++;
+
+            // get unordered list from HTML and create new list element
+            let ul = document.getElementById('time_list');
+            let li = document.createElement("li");
+
+            // build string for list element
+            let lap = document.createTextNode('Lap ' + lap_counter + ": " + ('0' + d.getHours()).slice(-2) + ":" + ('0' + d.getMinutes()).slice(-2) + ":" + ('0' + d.getSeconds()).slice(-2));
+
+            // append string to list element and append list element to unordered list
+            li.appendChild(lap);
+            ul.appendChild(li);
+        }
+    };
+
+
+
+    </script>
+</body>
+</html>
