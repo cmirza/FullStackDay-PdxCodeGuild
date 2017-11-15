@@ -1,0 +1,265 @@
+<html>
+<head>
+    <title>All-In-One Time</title>
+    <style>
+        body {
+            text-align: center;
+        }
+        #container {
+            width: 60%;
+            margin: 0;
+            padding: 20px 20px 40px 20px;
+            text-align: center;
+            border: 1px solid black;
+            display: inline-block;
+        }
+        #ct_time {
+            padding-bottom: 10px;
+        }
+        #ct_time_input {
+            text-align: right;
+        }
+        #sw_time {
+            padding-bottom: 10px;
+        }
+        #sw_lap_times {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+        }
+        #sw_lap_times ul {
+            text-align: left;
+            display: inline;
+        }
+        #navigation_bar {
+            width: 60%;
+            margin: 0;
+            text-align: center;
+            display: inline-block;
+        }
+        #navigation_bar ul {
+            list-style-type: none;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+
+        }
+        #navigation_bar li {
+            display: inline-block;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        #clock {
+            display: inline;
+        }
+        #stopwatch {
+            display: none;
+        }
+        #countdown_timer {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<audio id="alarm">
+  <source src="lab09-clock.ogg" type="audio/ogg">
+  <source src="lab09-clock.mp3" type="audio/mpeg">
+</audio>
+
+<div id="clock">
+    <h1>Clock</h1>
+    <div id="container">
+        <div id="clk_time"></div>
+    </div>
+</div>
+
+<div id="stopwatch">
+    <h1>Stopwatch</h1>
+    <div id="container">
+        <div id="sw_time"></div>
+        <div id="sw_controls">
+            <button id='sw_bt_start'>Start</button>
+            <button id='sw_bt_lap'>Lap</button>
+        </div >
+        <div id="sw_lap_times">
+            <ul id="sw_time_list">
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div id="countdown_timer">
+    <h1>Countdown Timer</h1>
+    <div id="container">
+        <div id="ct_time"></div>
+        <div id="ct_controls">
+            <input id='ct_time_input' type='text'>
+            <select id='ct_unit'>
+              <option value='seconds'>Seconds</option>
+              <option value='minutes'>Minutes</option>
+              <option value='hours'>Hours</option>
+            </select>
+            <button id='bt_ct_start'>Start</button>
+        </div >
+    </div>
+</div>
+
+<div id="navigation_bar">
+    <ul>
+        <li id="nav_clock"><a href="#">Clock</a></li>
+        <li id="nav_stopwatch"><a href="#">Stopwatch</a></li>
+        <li id="nav_countdown"><a href="#">Countdown Timer</a></li>
+    </ul>
+</div>
+    <script>
+
+    // Clock //
+
+    // initialize interval for myTimer
+    let clk_interval = setInterval(clk_my_timer, 1000);
+
+    // timer function, set new date to d variable, update time div with date and time string
+    function clk_my_timer() {
+        let clk_d = new Date();
+        document.getElementById("clk_time").innerHTML = clk_d.toLocaleDateString() + ' ' + clk_d.toLocaleTimeString();
+    }
+
+    // Stopwatch //
+
+    // get star and lap button elements from HTML
+    let sw_bt_start = document.getElementById('sw_bt_start');
+    let sw_bt_lap = document.getElementById('sw_bt_lap');
+
+    // create new date variable
+    let sw_d = new Date();
+    // initialize my_timer and lap_counter var and set to 0
+    let sw_my_timer = 0;
+    let sw_lap_counter = 0;
+    // set state of timer to false to prevent lap button from working if timer isn't running
+    let sw_timer_running = false;
+
+    // start timer button
+    sw_bt_start.onclick = function () {
+        // set state of timer to true
+        sw_timer_running = true;
+
+        // initialize time to 0 and clear interval of my timer
+        sw_d.setHours(0, 0, 0, 0);
+        clearInterval(sw_my_timer);
+
+        // set interval to 1000ms, at every interval increment seconds by 1, then set time to time element in HTML
+        sw_my_timer = setInterval(function () {
+            sw_d.setSeconds(sw_d.getSeconds() + 1);
+            document.getElementById("sw_time").innerHTML = ('0' + sw_d.getHours()).slice(-2) + ":" + ('0' + sw_d.getMinutes()).slice(-2) + ":" + ('0' + sw_d.getSeconds()).slice(-2);
+        }, 1000);
+    };
+
+    // lap button function
+    sw_bt_lap.onclick = function () {
+
+        // check if timer running is false and do nothing if true, otherwise continue
+        if (sw_timer_running === false){
+
+        } else {
+
+            // increment lap counter
+            sw_lap_counter++;
+
+            // get unordered list from HTML and create new list element
+            let sw_ul = document.getElementById('sw_time_list');
+            let sw_li = document.createElement("li");
+
+            // build string for list element
+            let sw_lap = document.createTextNode('Lap ' + sw_lap_counter + ": " + ('0' + sw_d.getHours()).slice(-2) + ":" + ('0' + sw_d.getMinutes()).slice(-2) + ":" + ('0' + sw_d.getSeconds()).slice(-2));
+
+            // append string to list element and append list element to unordered list
+            sw_li.appendChild(sw_lap);
+            sw_ul.appendChild(sw_li);
+        }
+    };
+
+
+
+
+    // Countdown Timer //
+
+        // get start button from HTML
+        let bt_ct_start = document.getElementById('bt_ct_start');
+
+        // create date object
+        let ct_d = new Date();
+
+        // set timer variable to 0
+        let ct_my_timer = 0;
+
+        // start button function
+        bt_ct_start.onclick = function () {
+
+            // get alarm sound effects and time input string
+            let alarm_sound = document.getElementById("alarm");
+            let ct_time_input = document.getElementById('ct_time_input').value;
+
+            // clear interval of timer, in case running timer again
+            clearInterval(ct_my_timer);
+
+            // check if input is blank or not a number
+            if (ct_time_input === '' || isNaN(ct_time_input)){
+                return;
+            }
+
+            // if input selection is seconds, minutes or hours, set to appropriate field
+            if (document.getElementById("ct_unit").value === 'seconds'){
+                ct_d.setHours(0, 0, ct_time_input, 0);
+            } else if (document.getElementById("ct_unit").value === 'minutes'){
+                ct_d.setHours(0, ct_time_input, 0, 0);
+            } else if (document.getElementById("ct_unit").value === 'hours'){
+                ct_d.setHours(ct_time_input, 0, 0, 0);
+            }
+
+            // set interval to my_timer and start decrementing every second. If hours, minutes and seconds are 0, play
+            // alarm , reset interval and set time to zero in all fields. otherwise write new time to page.
+            ct_my_timer = setInterval(function () {
+                ct_d.setSeconds(ct_d.getSeconds() - 1);
+                if (ct_d.getHours() === 0 && ct_d.getMinutes() === 0 && ct_d.getSeconds() === 0){
+                    alarm_sound.play();
+                    clearInterval(ct_my_timer);
+                    document.getElementById("ct_time").innerHTML = '00:00:00';
+                } else {
+                    document.getElementById("ct_time").innerHTML = ('0' + ct_d.getHours()).slice(-2) + ":" + ('0' + ct_d.getMinutes()).slice(-2) + ":" + ('0' + ct_d.getSeconds()).slice(-2);
+                }
+            }, 1000);
+        }
+
+
+    // Navigation Element //
+
+        let nav_clock = document.getElementById('nav_clock');
+        let nav_stopwatch = document.getElementById('nav_stopwatch');
+        let nav_countdown = document.getElementById('nav_countdown');
+
+        nav_clock.onclick = function () {
+            document.getElementById("countdown_timer").style.display = "none";
+            document.getElementById("stopwatch").style.display = "none";
+            document.getElementById("clock").style.display = "inline";
+        };
+
+        nav_stopwatch.onclick = function () {
+            document.getElementById("countdown_timer").style.display = "none";
+            document.getElementById("stopwatch").style.display = "inline";
+            document.getElementById("clock").style.display = "none";
+        };
+
+        nav_countdown.onclick = function () {
+            document.getElementById("countdown_timer").style.display = "inline";
+            document.getElementById("stopwatch").style.display = "none";
+            document.getElementById("clock").style.display = "none";
+        };
+
+
+
+    </script>
+</body>
+</html>

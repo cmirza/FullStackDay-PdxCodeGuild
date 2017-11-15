@@ -1,0 +1,93 @@
+<html>
+<head>
+    <title>Countdown Timer</title>
+    <style>
+        body {
+            text-align: center;
+        }
+        #container {
+            width: 60%;
+            margin: 0;
+            padding: 20px 20px 40px 20px;
+            text-align: center;
+            border: 1px solid black;
+            display: inline-block;
+        }
+        #time {
+            padding-bottom: 10px;
+        }
+        #time_input {
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+<audio id="alarm">
+  <source src="lab09-clock.ogg" type="audio/ogg">
+  <source src="lab09-clock.mp3" type="audio/mpeg">
+</audio>
+
+<h1>Countdown Timer</h1>
+<div id="container">
+    <div id="time"></div>
+    <div id="controls">
+        <input id='time_input' type='text'>
+        <select id='unit'>
+          <option value='seconds'>Seconds</option>
+          <option value='minutes'>Minutes</option>
+          <option value='hours'>Hours</option>
+        </select>
+        <button id='bt_start'>Start</button>
+    </div >
+</div>
+    <script>
+
+        // get start button from HTML
+        let bt_start = document.getElementById('bt_start');
+
+        // create date object
+        let d = new Date();
+
+        // set timer variable to 0
+        let my_timer = 0;
+
+        // start button function
+        bt_start.onclick = function () {
+
+            // get alarm sound effects and time input string
+            let alarm_sound = document.getElementById("alarm");
+            let time_input = document.getElementById('time_input').value;
+
+            // clear interval of timer, in case running timer again
+            clearInterval(my_timer);
+
+            // check if input is blank or not a number
+            if (time_input === '' || isNaN(time_input)){
+                return;
+            }
+
+            // if input selection is seconds, minutes or hours, set to appropriate field
+            if (document.getElementById("unit").value === 'seconds'){
+                d.setHours(0, 0, time_input, 0);
+            } else if (document.getElementById("unit").value === 'minutes'){
+                d.setHours(0, time_input, 0, 0);
+            } else if (document.getElementById("unit").value === 'hours'){
+                d.setHours(time_input, 0, 0, 0);
+            }
+
+            // set interval to my_timer and start decrementing every second. If hours, minutes and seconds are 0, play
+            // alarm , reset interval and set time to zero in all fields. otherwise write new time to page.
+            my_timer = setInterval(function () {
+                d.setSeconds(d.getSeconds() - 1);
+                if (d.getHours() === 0 && d.getMinutes() === 0 && d.getSeconds() === 0){
+                    alarm_sound.play();
+                    clearInterval(my_timer);
+                    document.getElementById("time").innerHTML = '00:00:00';
+                } else {
+                    document.getElementById("time").innerHTML = ('0' + d.getHours()).slice(-2) + ":" + ('0' + d.getMinutes()).slice(-2) + ":" + ('0' + d.getSeconds()).slice(-2);
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

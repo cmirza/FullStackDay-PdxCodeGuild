@@ -1,0 +1,107 @@
+<html>
+<head>
+    <title>Bouncing Ball</title>
+    <style>
+        body {
+            text-align: center;
+        }
+        #container {
+            width: 60%;
+            margin: 0;
+            padding: 0px 20px 40px 20px;
+            text-align: center;
+            display: inline-block;
+        }
+        #cnv {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+<h1>Bouncing Ball</h1>
+<div id="container">
+    <canvas id='cnv' width="500" height="500"></canvas>
+</div>
+    <script>
+
+        let cnv = document.getElementById('cnv');
+
+
+        class Ball {
+            constructor(diameter) {
+
+                // randomize direction and velocity
+                // try to prevent 0 in random
+                let vx = Math.floor(Math.random() * -10+1);
+                vx *= Math.floor(Math.random()*2) === 1 ? 1 : -1;
+                let vy = Math.floor(Math.random() * -10+1);
+                vy *= Math.floor(Math.random()*2) === 1 ? 1 : -1;
+
+                // randomize location of the ball within the canvas
+                let x = Math.floor(Math.random() * 500+1);
+                let y = Math.floor(Math.random() * 500+1);
+
+                this.x = x;
+                this.y = y;
+                this.vx = vx;
+                this.vy = vy;
+
+
+                this.width = diameter;
+                this.height = diameter;
+
+                this.radius = (diameter/2);
+                }
+            }
+
+        // instantiate ball object with diameter
+        let ball = new Ball(40);
+
+        // ball animation function
+        function animation_step() {
+
+            // draw ball
+            let ctx = cnv.getContext("2d");
+            ctx.clearRect(0, 0, cnv.width, cnv.height);
+            ctx.beginPath();
+            ctx.arc(ball.x, ball.y, ball.radius, 0, 2 * Math.PI, false);
+            ctx.fillStyle = "#000000";
+            ctx.fill();
+
+            // gravity
+            ball.vy += .50;
+
+            // move ball
+            ball.x += ball.vx;
+            ball.y += ball.vy;
+
+            // right boundary
+            if (ball.x + ball.radius > cnv.width) {
+                ball.vx *= -1;
+                ball.vx *= 0.99; // friction
+                ball.x = cnv.width - ball.radius;
+            }
+            // bottom boundary
+            if (ball.y + ball.radius > cnv.width) {
+                ball.vy *= -1;
+                ball.vy*= 0.99; // friction
+                ball.y = cnv.width - ball.radius;
+            }
+            // left boundary
+            if (ball.x - ball.radius < 0) {
+                ball.vx *= -1;
+                ball.vx*= 0.99; // friction
+            }
+            // top boundary
+            if (ball.y - ball.radius < 0) {
+                ball.vy *= -1;
+                ball.vy*= 0.99; // friction
+            }
+
+            window.requestAnimationFrame(animation_step);
+        }
+        window.requestAnimationFrame(animation_step);
+
+    </script>
+</body>
+</html>
