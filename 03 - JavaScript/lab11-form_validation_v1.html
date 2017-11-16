@@ -13,6 +13,14 @@
             border: 1px solid black;
             display: inline-block;
         }
+        #fields {
+            display: inline-flex;
+        }
+        .subtext {
+            color: darkgrey;
+            font-size: .5em;
+            font-style: italic;
+        }
         #login_field {
             text-align: left;
             display: inline-block;
@@ -39,45 +47,48 @@
 <h1>Form Validation</h1>
 <div id="container">
     <div id="warning" class="blank"></div>
-    <fieldset id="login_field">
-        <legend><b>Login:</b></legend>
-        <form>
-            User Name:<br>
-            <input type="text" id="user_name"><br>
-            Password:<br>
-            <input type="text" id="pass_word"><br>
-        </form>
-	</fieldset>
-    <fieldset id="name_field">
-        <legend><b>Name:</b></legend>
-        <form>
-            First Name:<br>
-            <input type="text" id="first_name"><br>
-            Last Name:<br>
-            <input type="text" id="last_name"><br>
-        </form>
-	</fieldset>
-        <fieldset id="contact_field">
-        <legend><b>Contact Info:</b></legend>
-        <form>
-            Email:<br>
-            <input type="text" id="email"><br>
-            Phone:<br>
-            <input type="text" id="phone"><br>
-        </form>
-	</fieldset>
-    	</fieldset>
-        <fieldset id="personal_field">
-        <legend><b>Personal Info:</b></legend>
-        <form>
-            Date of Birth:<br>
-            <input type="text" id="d_o_b"><br>
-            Social Security:<br>
-            <input type="text" id="ss_num"><br>
-        </form>
-	</fieldset>
+        <div id="fields">
+        <fieldset id="login_field">
+            <legend><b>Login:</b></legend>
+            <form>
+                User Name:<br>
+                <input type="text" id="user_name"><br>
+                <span class="subtext">at least six characters</span><br>
+                Password:<br>
+                <input type="text" id="pass_word"><span style="display:none;color:green" id="checkmark"> &#10003;</span><br>
+                <span class="subtext">at least eight characters, one uppercase, one digit, one special </span>
+            </form>
+        </fieldset>
+        <fieldset id="name_field">
+            <legend><b>Name:</b></legend>
+            <form>
+                First Name:<br>
+                <input type="text" id="first_name"><br>
+                Last Name:<br>
+                <input type="text" id="last_name"><br>
+            </form>
+        </fieldset>
+            <fieldset id="contact_field">
+            <legend><b>Contact Info:</b></legend>
+            <form>
+                Email:<br>
+                <input type="text" id="email"><br>
+                Phone:<br>
+                <input type="text" id="phone" placeholder="xxx-xxx-xxxx"><br>
+            </form>
+        </fieldset>
+            </fieldset>
+            <fieldset id="personal_field">
+            <legend><b>Personal Info:</b></legend>
+            <form>
+                Date of Birth:<br>
+                <input type="text" id="d_o_b" placeholder="xx/xx/xxxx"><br>
+                Social Security:<br>
+                <input type="text" id="ss_num" placeholder="xxx-xx-xxxx"><br>
+            </form>
+        </fieldset>
+    </div>
 </div>
-
     <script>
         let user_name = document.querySelector('#user_name');
         let pass_word = document.querySelector('#pass_word');
@@ -89,6 +100,7 @@
         let ss_num = document.querySelector('#ss_num');
 
         let warning = document.querySelector ('#warning');
+        let checkmark = document.querySelector ('#checkmark');
 
         user_name.oninput = function() {
             let pattern = /^[\w]{6,}/;
@@ -100,18 +112,18 @@
                 warning.innerHTML = '';
             }
         };
-
         pass_word.oninput = function() {
-            let pattern = /^[\w]{6,}/;
+            let pattern = /^(?=.*\d)(?=.*[A-Z])(?!.*[^a-zA-Z0-9@#\*\&$^+=])(.{8,})$/;
             if (!pattern.test(this.value)) {
                 this.style.outline = '1px solid red';
                 warning.innerHTML = 'Invalid password.';
+                checkmark.style.display = 'none';
             } else {
-                this.style.outline = 'none';
+                this.style.outline = '2px solid green';
+                checkmark.style.display = 'inline';
                 warning.innerHTML = '';
             }
         };
-
         first_name.oninput = function() {
             let pattern = /^[a-zA-Z\s'-]+$/;
             if (!pattern.test(this.value)) {
@@ -144,7 +156,6 @@
                 warning.innerHTML = '';
             }
         };
-
         phone.oninput = function() {
             let pattern = /^\d{3}-\d{3}-\d{4}/;
             if (!pattern.test(this.value)) {
@@ -155,9 +166,8 @@
                 warning.innerHTML = '';
             }
         };
-
         d_o_b.oninput = function() {
-            let pattern = /^\d{2}\/\d{2}\/\d{4}/; // needs to check for ranges (1-12, 1-30, 1900-2017)
+            let pattern = /((?:0[1-9])|(?:1[0-2]))\/((?:0[0-9])|(?:[1-2][0-9])|(?:3[0-1]))\/((?:[1-2])(?:0|9)(?:[0-9])(?:[0-9]))/; // matches for valid months, days and years between 1900-2099
             if (!pattern.test(this.value)) {
                 this.style.outline = '1px solid red';
                 warning.innerHTML = 'Invalid date of birth.';
@@ -166,7 +176,6 @@
                 warning.innerHTML = '';
             }
         };
-
         ss_num.oninput = function() {
             let pattern = /^\d{3}-\d{2}-\d{4}/;
             if (!pattern.test(this.value)) {
@@ -177,8 +186,6 @@
                 warning.innerHTML = '';
             }
         };
-
-
     </script>
 </body>
 </html>
