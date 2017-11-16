@@ -90,6 +90,7 @@
     </div>
 </div>
     <script>
+        // get elements from DOM
         let user_name = document.querySelector('#user_name');
         let pass_word = document.querySelector('#pass_word');
         let first_name = document.querySelector('#first_name');
@@ -102,6 +103,7 @@
         let warning = document.querySelector ('#warning');
         let checkmark = document.querySelector ('#checkmark');
 
+        // check inputs against regex for each element, give error when the don't match or approve when they do match
         user_name.oninput = function() {
             let pattern = /^[\w]{6,}/;
             if (!pattern.test(this.value)) {
