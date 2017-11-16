@@ -37,7 +37,8 @@
         let cnv = document.getElementById('cnv');
         let diameter = document.getElementById('sld_ball_size');
         let gravity = document.getElementById('sld_gravity');
-        let bt_bounce = document.getElementById('bt_bounce')
+        let bt_bounce = document.getElementById('bt_bounce');
+
 
         class Ball {
             constructor(diameter) {
@@ -58,8 +59,6 @@
                 this.vx = vx;
                 this.vy = vy;
 
-                this.width = diameter;
-                this.height = diameter;
                 this.radius = (diameter/2);
                 }
             }
@@ -74,12 +73,37 @@
 
         // ball bouncer
         bt_bounce.onclick = function () {
+
+            // horizontal variance
             let vx = Math.floor(Math.random() * -3+1);
             vx *= Math.floor(Math.random()*2) === 1 ? 1 : -1;
             ball.vx += vx;
+
+            // bounce force
             ball.vy += 5;
-            console.log(vx);
         };
+
+        // move ball on canvas
+        cnv.addEventListener("mousedown", getPosition, false);
+        function getPosition(event) {
+
+            // get x and y coordinates
+            let x = event.x;
+            let y = event.y;
+
+            // find where that click is on the canvas
+            x -= cnv.offsetLeft;
+            y -= cnv.offsetTop;
+
+            // give the ball these coordinates
+            ball.x = x;
+            ball.y = y;
+
+            // add horizontal variance to velocity
+            let vx = Math.floor(Math.random() * -3+1);
+            vx *= Math.floor(Math.random()*2) === 1 ? 1 : -1;
+            ball.vx += vx;
+        }
 
         // ball animation function
         function animation_step() {
@@ -122,9 +146,7 @@
                 ball.vy*= 0.95; // friction
             }
 
-            function mouseDown() {
-                document.getElementById("myP").style.color = "red";
-            }
+            console.log(ball.vx+', '+ball.vy);
 
             window.requestAnimationFrame(animation_step);
         }

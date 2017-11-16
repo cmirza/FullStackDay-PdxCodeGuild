@@ -35,6 +35,8 @@
 
         let balls = [];
 
+        let mass = 1;
+
         bt_newball.onclick = function () {
 
             let newball = {x:0, y:0, vx:0, vy:0, r:0};
@@ -65,6 +67,26 @@
 
         };
 
+        function calculate_collision(ball_1, ball_2) {
+            let coll_x = ((ball_1.x * ball_2.r) + (ball_2.x * ball_1.r))/(ball_1.r + ball_2.r); // what do
+            let coll_y = ((ball_1.y * ball_2.r) + (ball_2.y * ball_1.r))/(ball_1.r + ball_2.r); // these lines do?
+
+            let new_vx_1 = (ball_1.vx * (mass - mass) + (2 * mass * ball_2.vx)) / (mass+mass);
+            let new_vy_1 = (ball_1.vy * (mass - mass) + (2 * mass * ball_2.vy)) / (mass+mass);
+            let new_vx_2 = (ball_1.vx * (mass - mass) + (2 * mass * ball_2.vx)) / (mass+mass);
+            let new_vy_2 = (ball_1.vy * (mass - mass) + (2 * mass * ball_2.vy)) / (mass+mass);
+
+            ball_1.vx = new_vx_1;
+            ball_1.vy = new_vy_1;
+            ball_2.vx = new_vx_2;
+            ball_2.vy = new_vy_2;
+
+            ball_1.x += ball_1.vx;
+            ball_1.y += ball_1.vy;
+            ball_2.x += ball_2.vx;
+            ball_2.y += ball_2.vy;
+        }
+
         // ball animation function
         function animation_step() {
             let ctx = cnv.getContext("2d");
@@ -88,40 +110,41 @@
                 // right boundary
                 if (balls[i].x + balls[i].r > cnv.width) {
                     balls[i].vx *= -1;
-                    balls[i].vx *= 0.99; // friction
+                    balls[i].vx *= 0.95; // friction
                     balls[i].x = cnv.width - balls[i].r;
                 }
 
                 // bottom boundary
                 if (balls[i].y + balls[i].r > cnv.width) {
                     balls[i].vy *= -1;
-                    balls[i].vy*= 0.99; // friction
+                    balls[i].vy*= 0.95; // friction
                     balls[i].y = cnv.width - balls[i].r;
                 }
 
                 // left boundary
                 if (balls[i].x - balls[i].r < 0) {
                     balls[i].vx *= -1;
-                    balls[i].vx *= 0.99; // friction
+                    balls[i].vx *= 0.95; // friction
                 }
 
                 // top boundary
                 if (balls[i].y - balls[i].r < 0) {
                     balls[i].vy *= -1;
-                    balls[i].vy*= 0.99; // friction
+                    balls[i].vy*= 0.95; // friction
                 }
 
-                for (let j = 0; j < balls.length; j++) {
-                    if (balls.length < 2){
+                for (let j = i + 1; j < balls.length; j++) {
+                    let ball_1 = balls[i];
+                    let ball_2 = balls[j];
 
+                    let dist_x = ball_1.x - ball_2.x;
+                    let dist_y = ball_1.y - ball_2.y;
+
+                    let dist = Math.sqrt(dist_x*dist_x + dist_y*dist_y);
+
+                    if (dist < ball_1.r + ball_2.r) {
+                        calculate_collision(ball_1, ball_2);
                     }
-                    if (balls[i].x + balls[i].r + balls[j].r > balls[j].x && balls[i].x < balls[j].x + balls[i].r + balls[j].r && balls[i].y + balls[i].r + balls[j].r > balls[j].y && balls[i].y < balls[j].y + balls[i].r + balls[j].r)
-                    {
-                        alert('collision')
-                    }
-
-
-
                 }
 
             }
