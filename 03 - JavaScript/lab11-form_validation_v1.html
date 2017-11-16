@@ -1,0 +1,184 @@
+<html>
+<head>
+    <title>Form Validation</title>
+    <style>
+        body {
+            text-align: center;
+        }
+        #container {
+            width: 60%;
+            margin: 0;
+            padding: 20px 20px 40px 20px;
+            text-align: center;
+            border: 1px solid black;
+            display: inline-block;
+        }
+        #login_field {
+            text-align: left;
+            display: inline-block;
+        }
+        #name_field {
+            text-align: left;
+            display: inline-block;
+        }
+        #contact_field {
+            text-align: left;
+            display: inline-block;
+        }
+        #personal_field {
+            text-align: left;
+            display: inline-block;
+        }
+        #warning {
+            color: red;
+            padding-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<h1>Form Validation</h1>
+<div id="container">
+    <div id="warning" class="blank"></div>
+    <fieldset id="login_field">
+        <legend><b>Login:</b></legend>
+        <form>
+            User Name:<br>
+            <input type="text" id="user_name"><br>
+            Password:<br>
+            <input type="text" id="pass_word"><br>
+        </form>
+	</fieldset>
+    <fieldset id="name_field">
+        <legend><b>Name:</b></legend>
+        <form>
+            First Name:<br>
+            <input type="text" id="first_name"><br>
+            Last Name:<br>
+            <input type="text" id="last_name"><br>
+        </form>
+	</fieldset>
+        <fieldset id="contact_field">
+        <legend><b>Contact Info:</b></legend>
+        <form>
+            Email:<br>
+            <input type="text" id="email"><br>
+            Phone:<br>
+            <input type="text" id="phone"><br>
+        </form>
+	</fieldset>
+    	</fieldset>
+        <fieldset id="personal_field">
+        <legend><b>Personal Info:</b></legend>
+        <form>
+            Date of Birth:<br>
+            <input type="text" id="d_o_b"><br>
+            Social Security:<br>
+            <input type="text" id="ss_num"><br>
+        </form>
+	</fieldset>
+</div>
+
+    <script>
+        let user_name = document.querySelector('#user_name');
+        let pass_word = document.querySelector('#pass_word');
+        let first_name = document.querySelector('#first_name');
+        let last_name = document.querySelector('#last_name');
+        let email = document.querySelector('#email');
+        let phone = document.querySelector('#phone');
+        let d_o_b = document.querySelector('#d_o_b');
+        let ss_num = document.querySelector('#ss_num');
+
+        let warning = document.querySelector ('#warning');
+
+        user_name.oninput = function() {
+            let pattern = /^[\w]{6,}/;
+            if (!pattern.test(this.value)) {
+                this.style.outline = '1px solid red';
+                warning.innerHTML = 'Invalid user name.';
+            } else {
+                this.style.outline = 'none';
+                warning.innerHTML = '';
+            }
+        };
+
+        pass_word.oninput = function() {
+            let pattern = /^[\w]{6,}/;
+            if (!pattern.test(this.value)) {
+                this.style.outline = '1px solid red';
+                warning.innerHTML = 'Invalid password.';
+            } else {
+                this.style.outline = 'none';
+                warning.innerHTML = '';
+            }
+        };
+
+        first_name.oninput = function() {
+            let pattern = /^[a-zA-Z\s'-]+$/;
+            if (!pattern.test(this.value)) {
+                this.style.outline = '1px solid red';
+                warning.innerHTML = 'Invalid first name.';
+            } else {
+                this.style.outline = 'none';
+                warning.innerHTML = '';
+            }
+        };
+
+        last_name.oninput = function() {
+            let pattern = /^[a-zA-Z\s'-]+$/;
+            if (!pattern.test(this.value)) {
+                this.style.outline = '1px solid red';
+                warning.innerHTML = 'Invalid last name.';
+            } else {
+                this.style.outline = 'none';
+                warning.innerHTML = '';
+            }
+        };
+
+        email.oninput = function() {
+            let pattern = /\w+@\w+\.\w+/;
+            if (!pattern.test(this.value)) {
+                this.style.outline = '1px solid red';
+                warning.innerHTML = 'Invalid email address.';
+            } else {
+                this.style.outline = 'none';
+                warning.innerHTML = '';
+            }
+        };
+
+        phone.oninput = function() {
+            let pattern = /^\d{3}-\d{3}-\d{4}/;
+            if (!pattern.test(this.value)) {
+                this.style.outline = '1px solid red';
+                warning.innerHTML = 'Invalid phone number.';
+            } else {
+                this.style.outline = 'none';
+                warning.innerHTML = '';
+            }
+        };
+
+        d_o_b.oninput = function() {
+            let pattern = /^\d{2}\/\d{2}\/\d{4}/; // needs to check for ranges (1-12, 1-30, 1900-2017)
+            if (!pattern.test(this.value)) {
+                this.style.outline = '1px solid red';
+                warning.innerHTML = 'Invalid date of birth.';
+            } else {
+                this.style.outline = 'none';
+                warning.innerHTML = '';
+            }
+        };
+
+        ss_num.oninput = function() {
+            let pattern = /^\d{3}-\d{2}-\d{4}/;
+            if (!pattern.test(this.value)) {
+                this.style.outline = '1px solid red';
+                warning.innerHTML = 'Invalid social security number.';
+            } else {
+                this.style.outline = 'none';
+                warning.innerHTML = '';
+            }
+        };
+
+
+    </script>
+</body>
+</html>
