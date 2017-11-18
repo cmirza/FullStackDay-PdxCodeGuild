@@ -23,18 +23,22 @@
         }
         #login_field {
             text-align: left;
+            border: 1px solid black;
             display: inline-block;
         }
         #name_field {
             text-align: left;
+            border: 1px solid black;
             display: inline-block;
         }
         #contact_field {
             text-align: left;
+            border: 1px solid black;
             display: inline-block;
         }
         #personal_field {
             text-align: left;
+            border: 1px solid black;
             display: inline-block;
         }
         #warning {
@@ -56,7 +60,7 @@
                 <span class="subtext">at least six characters</span><br>
                 Password:<br>
                 <input type="text" id="pass_word"><span style="display:none;color:green" id="checkmark"> &#10003;</span><br>
-                <span class="subtext">at least eight characters, one uppercase, one digit, one special </span>
+                <span class="subtext">at least eight characters, one uppercase, one digit, one special</span>
             </form>
         </fieldset>
         <fieldset id="name_field">
@@ -64,6 +68,7 @@
             <form>
                 First Name:<br>
                 <input type="text" id="first_name"><br>
+                <span class="subtext">&nbsp</span><br>
                 Last Name:<br>
                 <input type="text" id="last_name"><br>
             </form>
@@ -73,6 +78,7 @@
             <form>
                 Email:<br>
                 <input type="text" id="email"><br>
+                <span class="subtext">&nbsp</span><br>
                 Phone:<br>
                 <input type="text" id="phone" placeholder="xxx-xxx-xxxx"><br>
             </form>
@@ -83,6 +89,7 @@
             <form>
                 Date of Birth:<br>
                 <input type="text" id="d_o_b" placeholder="xx/xx/xxxx"><br>
+                <span class="subtext">&nbsp</span><br>
                 Social Security:<br>
                 <input type="text" id="ss_num" placeholder="xxx-xx-xxxx"><br>
             </form>
@@ -149,7 +156,7 @@
         };
 
         email.oninput = function() {
-            let pattern = /\w+@\w+\.\w+/;
+            let pattern = /\w+@\w+\.\w+/; // allow for . and _ in user portion of address
             if (!pattern.test(this.value)) {
                 this.style.outline = '1px solid red';
                 warning.innerHTML = 'Invalid email address.';
