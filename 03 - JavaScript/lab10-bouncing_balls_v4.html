@@ -35,7 +35,7 @@
 
         let balls = [];
 
-        let mass = 1;
+        let mass = 1.5;
 
         bt_newball.onclick = function () {
 
@@ -54,7 +54,7 @@
             let x = Math.floor(Math.random() * 500+1);
             let y = Math.floor(Math.random() * 500+1);
 
-            let r = Math.floor(Math.random() * 40);
+            let r = 20;
 
             newball.x = x;
             newball.y = y;
@@ -74,8 +74,8 @@
 
             let new_vx_1 = (ball_1.vx * (mass - mass) + (2 * mass * ball_2.vx)) / (mass+mass);
             let new_vy_1 = (ball_1.vy * (mass - mass) + (2 * mass * ball_2.vy)) / (mass+mass);
-            let new_vx_2 = (ball_1.vx * (mass - mass) + (2 * mass * ball_2.vx)) / (mass+mass);
-            let new_vy_2 = (ball_1.vy * (mass - mass) + (2 * mass * ball_2.vy)) / (mass+mass);
+            let new_vx_2 = (ball_2.vx * (mass - mass) + (2 * mass * ball_1.vx)) / (mass+mass);
+            let new_vy_2 = (ball_2.vy * (mass - mass) + (2 * mass * ball_1.vy)) / (mass+mass);
 
             ball_1.vx = new_vx_1;
             ball_1.vy = new_vy_1;
