@@ -1,0 +1,144 @@
+<html>
+<head>
+    <title>Weather</title>
+    <style>
+        body {
+            text-align: center;
+        }
+        h3 {
+            margin-bottom: 0;
+        }
+        #container {
+            width: 60%;
+            margin: 0;
+            padding: 20px 20px 40px 20px;
+            text-align: center;
+            border: 1px solid black;
+            display: inline-block;
+        }
+        #weather_container {
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-around;
+        }
+        #weather_city{
+            padding-bottom: 10px;
+        }
+        .day {
+            text-align: left;
+        }
+    </style>
+    <script>
+        // function to get JSON data from requested URL
+        function http_get(url, success) {
+            let xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState === 4 && this.status === 200) {
+                        let data = JSON.parse(xhttp.responseText);
+                        success(data);
+                    }
+                };
+            xhttp.open("GET", url);
+            xhttp.send();
+        }
+    </script>
+</head>
+<body>
+    <link href="owfont-master/css/owfont-regular.css" rel="stylesheet" type="text/css">
+    <h1>Weather</h1>
+    <div id="container">
+            <h3 id="weather_city"></h3>
+        <div id="weather_container">
+        </div>
+    </div>
+
+<script>
+
+        let user_ip = '';
+        let user_city = '';
+        let user_lat = 0.0;
+        let user_lon = 0.0;
+
+        // function to uppercase first character in string
+        function upper_first(string)
+        {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+
+        // function to convert heading into compass points
+        function deg_to_compass(num) {
+            let val = Math.floor((num / 22.5) + 0.5);
+            let arr = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
+            return arr[(val % 16)];
+        }
+
+        // get elements from DOM
+        let weather_city = document.querySelector('#weather_city');
+        let weather_container = document.querySelector('#weather_container');
+
+
+        // get user IP
+        http_get('https://api.ipify.org/?format=json', function (data) {
+            user_ip = data.ip;
+
+            http_get('https://ipapi.co/'+user_ip+'/json/', function (data) {
+                user_city = data.city+', '+data.region_code;
+                user_lat = data.latitude;
+                user_lon = data.longitude;
+
+                for (let i=6; i<=22; i+=8) {
+                    http_get('http://api.openweathermap.org/data/2.5/forecast?lat='+user_lat+'&lon='+user_lon+'&units=imperial&appid=93c0c602f6a4b107ab630ac247fa1b96', function (data) {
+
+                    // get name of city
+                    let weather = data.list[i];
+                    weather_city.innerHTML = user_city;
+
+                    // create div for selected day
+                    let day_div = document.createElement('div');
+                    day_div.className = 'day';
+
+                    // add condition image
+                    let img_condition = document.createElement('i');
+                    img_condition.className = 'owf owf-'+weather.weather[0].id+' owf-5x';
+                    day_div.appendChild(img_condition);
+
+                    // add temp for day
+                    let temp = document.createElement('div');
+                    temp.innerHTML = weather.main.temp + '&#176;F';
+                    day_div.appendChild(temp);
+
+                    // add hi and lo range
+                    let hi_lo_temp = document.createElement('div');
+                    hi_lo_temp.innerHTML = weather.main.temp_min + '&#176;F' + ' to ' + weather.main.temp_max + '&#176;F';
+                    day_div.appendChild(hi_lo_temp);
+
+                    // check if there are clouds, if not, just add conditions for the day.
+                    // If there are, add cloud conditions and percent of cloudiness
+                    if (weather.clouds.all === 0){
+                        let condition = document.createElement('div');
+                        condition.innerHTML = weather.weather[0].main;
+                        day_div.appendChild(condition);
+                    } else {
+                        let cloud_condition = document.createElement('div');
+                        cloud_condition.innerHTML = upper_first(weather.weather[0].description);
+                        day_div.appendChild(cloud_condition);
+
+                        let clouds = document.createElement('div');
+                        clouds.innerHTML = weather.clouds.all + '% Cloudiness';
+                        day_div.appendChild(clouds);
+                    }
+
+                    // add wind speed and direction using degree to compass function
+                    let wind = document.createElement('div');
+                    wind.innerHTML = deg_to_compass(weather.wind.deg)+' '+weather.wind.speed+'mph';
+                    day_div.appendChild(wind);
+
+                    // add days condition to weather container
+                    weather_container.appendChild(day_div);
+                    });
+                }
+            });
+        });
+</script>
+</body>
+</html>

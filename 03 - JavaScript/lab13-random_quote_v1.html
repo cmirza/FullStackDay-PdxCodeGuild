@@ -1,0 +1,70 @@
+<html>
+<head>
+    <title>Random Quote</title>
+    <style>
+        body {
+            text-align: center;
+        }
+        #container {
+            width: 60%;
+            margin: 0;
+            padding: 20px 20px 40px 20px;
+            text-align: center;
+            border: 1px solid black;
+            display: inline-block;
+        }
+        #bt_getquote {
+            margin-top: 20px;
+        }
+    </style>
+    <script src="local_variables.js"></script>
+</head>
+<body>
+<h1>Random Quote</h1>
+<div id="container">
+    <div id="quote"></div>
+    <button id='bt_getquote'>Get Quote</button>
+</div>
+    <script>
+
+        // get elements from the DOM
+        let page_quote = document.querySelector('#quote');
+        let bt_getquote = document.querySelector('#bt_getquote');
+
+        // set quote id var
+        let quote_id = 0;
+
+        // http get function, if 404, run get quote function again
+        function http_get(url, success) {
+            let xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState === 1) {
+                    xhttp.setRequestHeader('Authorization', 'Token token="'+favqs_token)
+                } else if (this.readyState === 4 && this.status === 200) {
+                    let data = JSON.parse(xhttp.responseText);
+                    success(data);
+                } else if (this.readyState === 4 && this.status === 404) {
+                    get_quote()
+                }
+            };
+            xhttp.open("GET", url);
+            xhttp.send();
+        }
+
+        // get quote function, clear out page quote, pick a number between 1-1000 randomly,
+        // get quote and place it in page quote element
+        function get_quote() {
+            page_quote.innerHTML = "";
+            quote_id = Math.floor(Math.random() * 1000+1);
+            http_get('https://favqs.com/api/quotes/' + quote_id, function (data) {
+                page_quote.innerHTML = '\"'+data.body+'\"'+' - '+data.author;
+            });
+        }
+
+        // run get quote function on load and set get quote to button's onclick
+        get_quote();
+        bt_getquote.onclick = get_quote;
+
+    </script>
+</body>
+</html>

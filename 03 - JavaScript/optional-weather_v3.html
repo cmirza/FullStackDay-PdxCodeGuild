@@ -28,20 +28,24 @@
             text-align: left;
         }
     </style>
+    <script src="local_variables.js"></script>
 </head>
 <body>
     <link href="owfont-master/css/owfont-regular.css" rel="stylesheet" type="text/css">
     <h1>Weather</h1>
     <div id="container">
-
-            <input id='input_zip' type='text' value='97201' placeholder='enter a zip code'/>
-            <button id='bt_get_weather'>Go</button>
             <h3 id="weather_city"></h3>
         <div id="weather_container">
         </div>
     </div>
 
 <script>
+
+        let user_ip = '';
+        let user_city = '';
+        let user_lat = 0.0;
+        let user_lon = 0.0;
+
         // function to get JSON data from requested URL
         function http_get(url, success) {
             let xhttp = new XMLHttpRequest();
@@ -71,18 +75,23 @@
         // get elements from DOM
         let weather_city = document.querySelector('#weather_city');
         let weather_container = document.querySelector('#weather_container');
-        let input_zip = document.querySelector('#input_zip');
-        let bt_get_weather = document.querySelector('#bt_get_weather');
 
-        // function to build weather conditions for next three days
-        function get_weather(zip_code) {
-            for (let i=6; i<=22; i+=8) {
-                http_get("http://api.openweathermap.org/data/2.5/forecast?zip=" + zip_code + ",us&units=imperial&appid=93c0c602f6a4b107ab630ac247fa1b96", function (data) {
+
+        // get user IP
+        http_get('https://api.ipify.org/?format=json', function (data) {
+            user_ip = data.ip;
+
+            http_get('https://ipapi.co/'+user_ip+'/json/', function (data) {
+                user_city = data.city+', '+data.region_code;
+                user_lat = data.latitude;
+                user_lon = data.longitude;
+
+                for (let i=6; i<=22; i+=8) {
+                    http_get('http://api.openweathermap.org/data/2.5/forecast?lat='+user_lat+'&lon='+user_lon+'&units=imperial&appid='+opw_token, function (data) {
 
                     // get name of city
-                    let city = data.city.name;
                     let weather = data.list[i];
-                    weather_city.innerHTML = city;
+                    weather_city.innerHTML = user_city;
 
                     // create div for selected day
                     let day_div = document.createElement('div');
@@ -112,8 +121,7 @@
                         day_div.appendChild(condition);
                     } else {
                         let cloud_condition = document.createElement('div');
-                        let cc_string = upper_first(weather.weather[0].description);
-                        cloud_condition.innerHTML = cc_string;
+                        cloud_condition.innerHTML = upper_first(weather.weather[0].description);
                         day_div.appendChild(cloud_condition);
 
                         let clouds = document.createElement('div');
@@ -128,20 +136,10 @@
 
                     // add days condition to weather container
                     weather_container.appendChild(day_div);
-                });
-            }
-        }
-
-        // if zip code is blank do nothing, otherwise clear out container contents and pass
-        // zip code to get weather function
-        bt_get_weather.onclick = function () {
-            if (input_zip.value === ''){
-
-            } else {
-                weather_container.innerHTML = "";
-                get_weather(input_zip.value);
-            }
-        }
+                    });
+                }
+            });
+        });
 </script>
 </body>
 </html>

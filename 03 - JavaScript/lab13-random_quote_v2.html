@@ -1,0 +1,72 @@
+<html>
+<head>
+    <title>Search Quotes</title>
+    <style>
+        body {
+            text-align: center;
+        }
+        #container {
+            width: 60%;
+            margin: 0;
+            padding: 20px 20px 40px 20px;
+            text-align: center;
+            border: 1px solid black;
+            display: inline-block;
+        }
+        #search {
+            margin-bottom: 20px;
+        }
+        .quote_text {
+            padding: 5px 0 5px 0;
+        }
+    </style>
+    <script src="local_variables.js"></script>
+</head>
+<body>
+<h1>Search Quotes</h1>
+<div id="container">
+    <div id="search">
+        <input id='in_search' type='text' onkeydown = "if (event.keyCode === 13) document.getElementById('bt_search').click()"/>
+        <button id='bt_search'>Search</button>
+    </div>
+    <div id="quote_container"></div>
+</div>
+    <script>
+        let quote_container = document.querySelector('#quote_container');
+        let bt_search = document.querySelector('#bt_search');
+        let in_search = document.querySelector('#in_search');
+
+
+        function http_get(url, success) {
+            let xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState === 1) {
+                    xhttp.setRequestHeader('Authorization', 'Token token="'+favqs_token)
+                } else if (this.readyState === 4 && this.status === 200) {
+                    let data = JSON.parse(xhttp.responseText);
+                    success(data);
+                } else if (this.readyState === 4 && this.status === 404) {
+
+                }
+            };
+            xhttp.open("GET", url);
+            xhttp.send();
+        }
+
+        bt_search.onclick = function () {
+            http_get('https://favqs.com/api/quotes/?filter=' + in_search.value, function (data) {
+                quote_container.innerHTML = "";
+                for (let i = 0; i < data.quotes.length; i++) {
+                    let current_quote = data.quotes[i].body;
+                    let r = new RegExp('(' + in_search.value + ')', 'ig');
+                    current_quote = current_quote.replace(r, '<b>$&</b>');
+                    let quote_div = document.createElement('div');
+                    quote_div.innerHTML = current_quote+' - '+data.quotes[i].author;
+                    quote_div.className = 'quote_text';
+                    quote_container.appendChild(quote_div);
+                }
+            });
+        }
+    </script>
+</body>
+</html>
