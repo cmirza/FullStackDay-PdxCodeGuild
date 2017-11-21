@@ -28,20 +28,7 @@
             text-align: left;
         }
     </style>
-    <script>
-        // function to get JSON data from requested URL
-        function http_get(url, success) {
-            let xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() {
-                if (this.readyState === 4 && this.status === 200) {
-                        let data = JSON.parse(xhttp.responseText);
-                        success(data);
-                    }
-                };
-            xhttp.open("GET", url);
-            xhttp.send();
-        }
-    </script>
+    <script src="local_variables.js"></script>
 </head>
 <body>
     <link href="owfont-master/css/owfont-regular.css" rel="stylesheet" type="text/css">
@@ -76,6 +63,18 @@
         let weather_city = document.querySelector('#weather_city');
         let weather_container = document.querySelector('#weather_container');
 
+        // function to get JSON data from requested URL
+        function http_get(url, success) {
+            let xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState === 4 && this.status === 200) {
+                        let data = JSON.parse(xhttp.responseText);
+                        success(data);
+                    }
+                };
+            xhttp.open("GET", url);
+            xhttp.send();
+        }
 
         // get user IP
         http_get('https://api.ipify.org/?format=json', function (data) {
@@ -87,7 +86,7 @@
                 user_lon = data.longitude;
 
                 for (let i=6; i<=22; i+=8) {
-                    http_get('http://api.openweathermap.org/data/2.5/forecast?lat='+user_lat+'&lon='+user_lon+'&units=imperial&appid=93c0c602f6a4b107ab630ac247fa1b96', function (data) {
+                    http_get('http://api.openweathermap.org/data/2.5/forecast?lat='+user_lat+'&lon='+user_lon+'&units=imperial&appid='+opw_token, function (data) {
 
                     // get name of city
                     let weather = data.list[i];
