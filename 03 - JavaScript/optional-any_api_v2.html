@@ -1,0 +1,152 @@
+<html>
+<head>
+    <title>Photo Search</title>
+    <style>
+        body {
+            text-align: center;
+        }
+        h3 {
+            margin-bottom: 0;
+        }
+        #container {
+            width: 60%;
+            padding: 20px 20px 40px 20px;
+            text-align: center;
+            border: 1px solid black;
+            display: inline-block;
+        }
+        #photo_container {
+            padding-top: 20px;
+            display: flex;
+            flex-direction: row;
+            flex-flow: wrap;
+            justify-content: space-evenly;
+        }
+        #overlay {
+            position: fixed;
+            display: none;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 2;
+
+        }
+        #controls {
+            padding-top: 20px;
+        }
+        #powered_by img{
+            padding-top: 20px;
+            width: 50px;
+        }
+        .photos {
+            padding: 5px 5px 5px 5px;
+        }
+    </style>
+    <script src="local_variables.js"></script>
+</head>
+<body>
+    <h1>Photo Search</h1>
+    <div id="container">
+            <input id='input_search' type='text' onkeydown = "if (event.keyCode === 13) document.getElementById('bt_search').click()"/>
+            <button id='bt_search'>search</button>
+        <div id="photo_container">
+        </div>
+    <div id="controls">
+        <button id='bt_prev_page' disabled>Previous Page</button>
+        <button id='bt_next_page' disabled>Next Page</button>
+    </div>
+    <div id="powered_by"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9b/Flickr_logo.png"></div>
+    </div>
+    <div id="overlay" style="visibility:hidden"></div>
+
+<script>
+        // function to get JSON data from requested URL
+        function http_get(url, success) {
+            let xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState === 4 && this.status === 200) {
+                        let data = JSON.parse(xhttp.responseText);
+                        success(data);
+                    }
+                };
+            xhttp.open("GET", url);
+            xhttp.send();
+        }
+
+        // get elements from DOM
+        let input_search = document.querySelector('#input_search');
+        let bt_search = document.querySelector('#bt_search');
+        let photo_container = document.querySelector('#photo_container');
+        let bt_prev_page = document.querySelector('#bt_prev_page');
+        let bt_next_page = document.querySelector('#bt_next_page');
+
+        let current_page = 0;
+        let search_term = '';
+
+        function get_photo(search_term, current_page) {
+
+                http_get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key="+flickr_api_key+"&tags="+search_term+"&per_page=8&page="+current_page+"&format=json&nojsoncallback=1", function (data) {
+
+                    for (let i = 0; i < data.photos.photo.length; i++) {
+
+                    // create div for selected day
+                    let photo_div = document.createElement('div');
+                    photo_div.className = 'photos';
+
+                    // add temp for day
+                    let image_thumb = document.createElement('img');
+                    image_thumb.src = 'https://farm'+data.photos.photo[i].farm+'.staticflickr.com/'+data.photos.photo[i].server+'/'+data.photos.photo[i].id+'_'+data.photos.photo[i].secret+'_q.jpg';
+
+                    let photo_link = document.createElement('a');
+                    photo_link.href = 'https://farm'+data.photos.photo[i].farm+'.staticflickr.com/'+data.photos.photo[i].server+'/'+data.photos.photo[i].id+'_'+data.photos.photo[i].secret+'_b.jpg';
+                    photo_link.target = '_blank';
+
+
+                    photo_link.appendChild(image_thumb);
+                    photo_div.appendChild(photo_link);
+                    photo_container.appendChild(photo_div);
+
+                }
+            })
+        }
+
+        // if zip code is blank do nothing, otherwise clear out container contents and pass
+        // zip code to get weather function
+        bt_search.onclick = function () {
+            if (input_search.value === ''){
+            } else {
+                bt_next_page.disabled = false;
+                bt_prev_page.disabled = false;
+
+                photo_container.innerHTML = "";
+                search_term = input_search.value;
+                search_term = search_term.split(' ').join('+');
+                console.log(search_term);
+                current_page = 1;
+                get_photo(search_term, current_page);
+            }
+        };
+
+        bt_next_page.onclick = function () {
+                photo_container.innerHTML = "";
+                current_page += 1;
+                get_photo(search_term, current_page);
+        };
+
+        bt_prev_page.onclick = function () {
+            if (current_page === 1){
+            } else {
+                photo_container.innerHTML = "";
+                current_page -= 1;
+                get_photo(search_term, current_page);
+                }
+        }
+
+
+</script>
+</body>
+</html>

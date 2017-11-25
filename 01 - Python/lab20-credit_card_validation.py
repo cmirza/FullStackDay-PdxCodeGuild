@@ -17,7 +17,7 @@ def ccv(num):
     for i in num:
         rev_nums.insert(0, i)
     num = rev_nums
-    # double every number in list
+    # double every other number in list
     for i in range(0, len(num), 2):
         num[i] = num[i]*2
     # subtract 9 for values greater than 9
