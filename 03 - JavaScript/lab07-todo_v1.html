@@ -14,7 +14,6 @@
         }
         table, td {
             border: 1px solid black;
-
         }
         #container {
             width: 60%;
@@ -65,8 +64,13 @@
             // get text for list item
             let to_do_item = to_do_input.value;
 
+            if (to_do_item === "" || to_do_item === null || to_do_item === 0) {
+                alert('Please enter a note.');
+                return;
+            }
+
             // create new row and 3 cells
-            let row = to_do_table.insertRow(0);
+            let row = to_do_table.insertRow(-1);
             let cell1 = row.insertCell(0);
             let cell2 = row.insertCell(1);
             let cell3 = row.insertCell(2);

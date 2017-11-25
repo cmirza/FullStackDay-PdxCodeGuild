@@ -1,0 +1,179 @@
+<html>
+<head>
+    <title>Todo List</title>
+    <style>
+        body {
+            text-align: center;
+        }
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin: 0 auto;
+            margin-top: 20px;
+
+        }
+        table, td {
+            border: 1px solid black;
+        }
+        #container {
+            width: 60%;
+            margin: 0;
+            padding: 20px 20px 40px 20px;
+            text-align: center;
+            border: 1px solid black;
+            display: inline-block;
+        }
+        #to_do_input {
+            width: 40%;
+        }
+        .item {
+            padding-left: 5px;
+            font-size: .8em;
+        }
+        .complete {
+            width: 1px;
+        }
+        .delete {
+            width: 1px;
+        }
+        .done {
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+<body>
+<h1>Todo List</h1>
+<div id="container">
+    <form>
+        <input id='to_do_input' type='text'/>
+        <button id='bt_add_item' type='submit'>Add</button>
+    </form>
+    <div id="list">
+        <table id="to_do_table">
+        </table>
+    </div>
+    <button id='bt_check_list'>check list</button>
+</div>
+    <script>
+        let to_do_input = document.getElementById('to_do_input');
+        let to_do_table = document.getElementById('to_do_table');
+        let bt_add_item = document.getElementById('bt_add_item');
+
+        let bt_check_list = document.getElementById('bt_check_list');
+
+        let to_do_list = [];
+        let key = 'to_do';
+
+        bt_check_list.onclick = function() {
+            console.log(to_do_list);
+        };
+
+        // add item function
+        bt_add_item.onclick = function() {
+
+            // check if input box is empty and give an error
+            if (to_do_input.value === "" || to_do_input.value === null || to_do_input.value === 0) {
+                alert('Please enter a note.');
+                return;
+            }
+
+            // create to do item object, add it to to do list array and save array to local storage
+            let do_item = {};
+            do_item.text = to_do_input.value;
+            do_item.complete = false;
+            to_do_list.unshift(do_item);
+            let json_to_do = JSON.stringify(to_do_list);
+            localStorage.setItem(key, json_to_do);
+
+            // send to do item object to new to do function
+            new_to_do(do_item);
+
+            // clears text box and returns false to prevent window from refreshing when submitting
+            to_do_input.value = '';
+            return false
+        };
+
+        window.onload = function() {
+            // Check for localStorage capabilities
+            if (!window.localStorage) {
+                alert("Local storage not available!");
+            } else {
+                let json_to_do = localStorage.getItem(key);
+                if (json_to_do !== null) {
+                    to_do_list = JSON.parse(json_to_do);
+                    for (let i = 0; i < to_do_list.length; i++) {
+                        new_to_do(to_do_list[i]);
+
+                    }
+                }
+            }
+        };
+
+//        function complete_to_do(item) {
+//            item.parentNode.previousSibling.classList.toggle('done');
+//            let index = item.parentNode.parentNode.rowIndex;
+//            console.log(index);
+//            to_do_list[index].complete = !to_do_list[index].complete;
+//            let json_to_do = JSON.stringify(to_do_list);
+//            localStorage.setItem(key, json_to_do);
+//        }
+
+//        function delete_to_do(item) {
+//            item.parentNode.parentNode.parentNode.removeChild(item.parentNode.parentNode);
+//            let index = item.parentNode.parentNode.rowIndex+1;
+//            console.log(index);
+//            to_do_list.splice(index, 1);
+//            let json_to_do = JSON.stringify(to_do_list);
+//            localStorage.setItem(key, json_to_do);
+//        }
+
+        function new_to_do(item) {
+            // create new row and 3 cells
+            let row = to_do_table.insertRow(0);
+            let cell1 = row.insertCell(0);
+            let cell2 = row.insertCell(1);
+            let cell3 = row.insertCell(2);
+
+            // place list item text in first cell
+            cell1.innerHTML = item.text;
+            cell1.className = 'item';
+
+            if (item.complete === true) {
+                cell1.classList.toggle('done');
+            }
+
+            // add completed button in second cell
+            cell2.innerHTML = '<button id=\'bt_complete_item\'>&#10003;</button>';
+            cell2.className = 'complete';
+
+            //add delete button in third cell
+            cell3.innerHTML = '<button id=\'bt_remove_item\'>&#10007;</button>';
+            cell3.className = 'delete';
+
+            let bt_remove_item = document.getElementById('bt_remove_item');
+            let bt_complete_item = document.getElementById('bt_complete_item');
+
+            // function for completed button, toggles css style for strike through of text
+            bt_complete_item.onclick = function() {
+                this.parentNode.previousSibling.classList.toggle('done');
+                let index = this.parentNode.parentNode.rowIndex;
+                console.log(index);
+                to_do_list[index].complete = !to_do_list[index].complete;
+                let json_to_do = JSON.stringify(to_do_list);
+                localStorage.setItem(key, json_to_do);
+            };
+
+            // function for delete button, goes three levels up from the button and deletes child
+            bt_remove_item.onclick = function() {
+                this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);
+                let index = this.parentNode.parentNode.rowIndex;
+                console.log(index);
+                to_do_list.splice(index, 1);
+//                let json_to_do = JSON.stringify(to_do_list);
+//                localStorage.setItem(key, json_to_do);
+            };
+
+        }
+    </script>
+</body>
+</html>
