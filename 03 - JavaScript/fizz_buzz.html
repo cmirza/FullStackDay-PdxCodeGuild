@@ -1,0 +1,37 @@
+<html>
+<head>
+    <title>Fizzbuzz</title>
+    <script>
+    function fizz_buzz(stop_num) {
+
+        let number_list = [];
+
+        for (let i = 1; i <= stop_num; i++) {
+            if ((i % 3 === 0) && (i % 5 === 0)) {
+                number_list.push("FizzBuzz");
+            } else if (i % 3 === 0) {
+                number_list.push("Fizz");
+            } else if (i % 5 === 0) {
+                number_list.push("Buzz");
+            } else {
+                number_list.push(i);
+            }
+        }
+        return number_list;
+
+    }
+
+    function joined_buzz(number) {
+        let number_list = fizz_buzz(number);
+        return number_list.join(" ");
+    }
+
+    let stop_num = prompt("How many numbers?");
+    let joined = joined_buzz(stop_num);
+    document.write(joined);
+
+    </script>
+</head>
+<body>
+</body>
+</html>
