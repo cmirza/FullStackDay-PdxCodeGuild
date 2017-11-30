@@ -1,24 +1,15 @@
+{% load static %}
 
-
-<style>
-    body {
-        font-family: Verdana, "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif
-    }
-    ul li:nth-child(odd) {
-        background-color: lavender;
-    }
-    form {
-        display: inline;
-    }
-</style>
+<link  rel="stylesheet" type="text/css" href="{% static 'todo/style.css'%}"/>
 
 <h1>Todo</h1>
 
 <form action="{% url 'todo:savetodo' %}" method="post">
     {% csrf_token %}
-<input type="text" name="todo_text"/>
-<button type="submit">add todo</button>
+    <input type="text" name="todo_text"/>
+    <button type="submit">add todo</button>
 </form>
+
 <ul>
     {% for todo_item in todo_items %}
     <li>
@@ -27,8 +18,13 @@
             <input type="hidden" value="{{ todo_item.id }}" name="todo_id"/>
             <button type="submit">✓</button>
         </form>
-        <span>{{ todo_item.id }} -  {{ todo_item.todo_text}}</span>
+        <span>{{ todo_item.todo_text }}</span>
     </li>
     {% endfor %}
 </ul>
 
+<ul id="completed_list">
+    {% for completed_item in completed_items %}
+    <li>{{ completed_item.todo_text }}</li>
+    {% endfor %}
+</ul>
