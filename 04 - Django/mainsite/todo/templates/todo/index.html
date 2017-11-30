@@ -7,6 +7,9 @@
     ul li:nth-child(odd) {
         background-color: lavender;
     }
+    form {
+        display: inline;
+    }
 </style>
 
 <h1>Todo</h1>
@@ -18,7 +21,14 @@
 </form>
 <ul>
     {% for todo_item in todo_items %}
-    <li>{{ todo_item.todo_text }}</li>
+    <li>
+        <form action="{% url 'todo:completetodo' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" value="{{ todo_item.id }}" name="todo_id"/>
+            <button type="submit">✓</button>
+        </form>
+        <span>{{ todo_item.id }} -  {{ todo_item.todo_text}}</span>
+    </li>
     {% endfor %}
 </ul>
 
