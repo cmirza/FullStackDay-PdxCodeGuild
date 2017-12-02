@@ -17,7 +17,7 @@ def saveurl(request):
 
     url_string = request.POST['url_string']
 
-    # can't figure out how to do try, except with a model query
+    # can't figure out how to do try
     #
     # try:
     #     URLItem.objects.filter(url_string__isnull=url_string == False)
