@@ -1,0 +1,30 @@
+<style>
+input[type="text"] {
+    margin-top: 20px;
+    width: 50%;
+}
+body {
+    text-align: center;
+}
+#container {
+    width: 60%;
+    margin: 0;
+    padding: 0 20px 40px 20px;
+    text-align: center;
+    border: 1px solid black;
+    display: inline-block;
+}
+#error {
+    padding-top: 20px;
+}
+</style>
+
+<h1>URL Shortener</h1>
+<div id="container">
+<div id="error">URL not found...</div>
+<form action="{% url 'url_short:saveurl' %}" method="post">
+    {% csrf_token %}
+    <input type="text" name="url_string"/>
+    <button type="submit">Shorten URL!</button>
+</form>
+</div>
