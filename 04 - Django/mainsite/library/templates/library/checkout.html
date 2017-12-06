@@ -1,0 +1,89 @@
+<title>Library Checkout</title>
+<style>
+body {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+#container {
+    width: 60%;
+    margin: 0;
+    padding: 5px 0 20px 0;
+    text-align: center;
+    border: 1px solid #000;
+    border-radius: 10px;
+    display: inline-block;
+}
+#inner_container {
+    width: 80%;
+    margin: 10px auto 20px auto;
+    padding: 0 20px 0 20px;
+    text-align: center;
+    border: 1px solid #000;
+    border-radius: 10px;
+    display: block;
+}
+ul {
+    text-align: left;
+    list-style-type: none;
+    padding: 0 20px 5px 20px;
+    margin-bottom: 20px;
+    font-size: .75em;
+}
+ul li:nth-child(odd) {
+    background-color:lightgray;
+}
+li {
+    padding-left: 5px;
+}
+h1 {
+    font-size: 1.25em;
+}
+h3 {
+    font-size: .9em;
+    margin-bottom: 5px;
+}
+</style>
+
+<h1>Library Checkout</h1>
+<div id="container">
+    <h3>New Checkout</h3>
+    <div id="inner_container">
+        <br>
+        <form action="{% url 'library:check_out' %}" method="POST">
+            {% csrf_token %}
+            <input name="user_name" type="text" placeholder="First Name, Last Name">
+                <select name="book_id">
+                    <option value="blank" selected="selected">Select book</option>
+                    {% for book in ready_books %}
+                        <option value="{{ book.id }}">{{ book.title }}</option>
+                    {% endfor %}
+                </select>
+            <br>
+            <br>
+            <button type="submit">Check Out</button>
+        </form>
+    </div>
+    <h3>Open Checkouts</h3>
+    <div id="inner_container">
+        <br>
+        <form action="{% url 'library:check_in' %}" method="POST">
+            {% csrf_token %}
+            <ul id="open_list">
+                {% csrf_token %}
+                {% for checkouts in open_checkouts %}
+                <li><input type="checkbox" name="checked_out" value="{{ checkouts.book.id }}"/> <b>{{ checkouts.user }}</b>, {{ checkouts.book }}, <i>{{ checkouts.check_out }}</i></li>
+                {% endfor %}
+                </ul>
+            <button type="submit">Check In</button>
+        </form>
+    </div>
+    <h3>Completed Checkouts</h3>
+    <div id="inner_container">
+        <br>
+        <ul id="completed_list">
+            {% for checkouts in completed_checkouts %}
+            <li><b>{{ checkouts.user }}</b>, {{ checkouts.book }}, <i>{{ checkouts.check_out }} - {{ checkouts.check_in }}</i></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
