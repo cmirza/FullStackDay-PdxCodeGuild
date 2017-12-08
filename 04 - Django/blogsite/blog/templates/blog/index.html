@@ -1,0 +1,31 @@
+<title>Blog</title>
+<style>
+body {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+#container {
+    width: 60%;
+    margin: 0;
+    padding: 0 20px 20px 20px;
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 10px;
+    display: inline-block;
+}
+h1 {
+    font-size: 1.25em;
+}
+p {
+    padding-top: 15px;
+    font-size: .7em;
+}
+a:link {
+    text-decoration: none;
+}
+</style>
+
+<h1>Blog</h1>
+<div id="container">
+    <p>A simple blog. <a href="{% url 'blog:register' %}"><b>Create</b></a> an account or <a href="{% url 'blog:login' %}"><b>login</b></a> if you already have one.</p>
+</div>

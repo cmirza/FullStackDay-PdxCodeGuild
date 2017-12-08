@@ -1,0 +1,91 @@
+<title>{{ post.title }} | Blog</title>
+<style>
+body {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+#container {
+    width: 60%;
+    margin: 0;
+    padding: 0 20px 20px 20px;
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 10px;
+    display: inline-block;
+}
+#inner_container {
+    font-size: .7em;
+    width: 30%;
+    margin: 10px auto 20px auto;
+    padding: 5px 10px 5px 10px;
+    text-align: center;
+    border: 1px solid #000;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-evenly;
+}
+#inner_container a{
+    text-decoration: none;
+}
+#article_container {
+    width: 90%;
+    margin: 10px auto 20px auto;
+}
+#comment_container {
+    width: 95%;
+    margin: 10px auto 20px auto;
+}
+#comment_box {
+    width: 95%;
+}
+h1 {
+    font-size: 1.25em;
+}
+span {
+    font-size: .75em;
+}
+p {
+    text-align: left;
+    font-size: .75em;
+    margin: 10px auto 20px auto;
+}
+ul {
+    padding: 0 20px 0 20px;
+    text-align: left;
+    list-style-type: none;
+    font-size: .75em;
+}
+li {
+    padding: 5px 5px 5px 5px;
+}
+ul li:nth-child(odd) {
+    background-color: #e6e6e6;
+}
+ul li:nth-child(even) {
+    background-color: #b5b5b5;
+}
+</style>
+
+<h1>{{ post.title }}</h1>
+<div id="container">
+    <div id="inner_container">
+        <a href="{% url 'blog:post_compose' %}">Post</a><a href="{% url 'blog:post_list' %}">Browse</a><a href="{% url 'blog:profile' %}">Profile</a><a href="{% url 'blog:logout_user' %}">Log Out</a>
+    </div>
+    <span>by {{ post.user }} - {{ post.timestamp }}</span>
+    <div id="article_container"><p>{{ post.body|linebreaks }}</p></div>
+    <div id="comment_container">
+        <span>Comments:</span>
+        <ul id="comments">
+            {% for comment in comments %}
+            <li>{{ comment.body }}<br><b>{{ comment.user }}, {{ comment.timestamp }}</b></li>
+            {% endfor %}
+        </ul>
+        <br>
+        <form action="{% url 'blog:comment' post.id %}" method="post">
+            {% csrf_token %}
+            <textarea id="comment_box" name="comment" rows="4" cols="100"></textarea><br>
+            <br>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</div>

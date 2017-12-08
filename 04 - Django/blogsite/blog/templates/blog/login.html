@@ -1,0 +1,53 @@
+<title>Login | Blog</title>
+<style>
+body {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+#container {
+    width: 60%;
+    margin: 0;
+    padding: 20px 20px 20px 20px;
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 10px;
+    display: inline-block;
+}
+#message {
+    padding-bottom: 10px;
+    font-size: .7em;
+}
+h1 {
+    font-size: 1.25em;
+}
+form {
+    font-size: .7em;
+    display: inline-block;
+
+}
+#form_container {
+    text-align: left;
+}
+input[name=user_name] {
+    margin-bottom: 4px;
+}
+</style>
+
+<h1>Login</h1>
+<div id="container">
+    {% if message %}
+    <div id="message" style="color:red">{{message}}</div>
+    {% endif %}
+    <form action="{% url 'blog:login_user' %}" method="POST">
+        {% csrf_token %}
+        <div id="form_container">
+            User Name:<br>
+            <input name="user_name" type="text">
+            <br>
+            Password:<br>
+            <input name="user_pass" type="password">
+        </div>
+        <br>
+        <button type="submit">Login</button>
+    </form>
+</div>
