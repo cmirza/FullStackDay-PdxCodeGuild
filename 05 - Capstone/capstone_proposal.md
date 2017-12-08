@@ -59,9 +59,6 @@ The goal of the project is to take a user's zip code then reference a database o
     - AWS Elastic Beanstalk (http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/GettingStarted.html)
         - EC2
         - RDS
-    - _Alternative:_ Digital Ocean VPS
-        - Ubuntu Server
-        - Nginx
 
 ### Schedule
 
@@ -74,12 +71,13 @@ The goal of the project is to take a user's zip code then reference a database o
         4. Greater Washington
     - Build basic front end for testing
 - **Milestone 2**
-    - Expand front end with JS framework
     - Apply CSS framework
+    - Expand front end with JS framework?
+    - Implement REST framework?
 - **Milestone 3**
     - Display data geographically w/ map API
     - Deploy site on AWS or Digital Ocean
 - **Milestone 4** (post-class)
-    - Find more data sets to expand upon
+    - Find more data sets
     - Use CAERS DB (https://www.fda.gov/Food/ComplianceEnforcement/ucm494015.htm) for alerts on unsafe foods
-    - create links to popular recipes for each item
+    - Find recipe API, supply recipes for each item listed
