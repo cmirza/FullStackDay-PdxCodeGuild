@@ -8,14 +8,13 @@ Capstone Proposal
 
 ### Project Overview
 
-The goal of the project is to take a user's zip code then reference a database of fresh produce with zip codes each plant is grown in and time of year it's in season for that area. The point of the project is to advise users on what produce to buy that can be locally sourced.
+The goal of the project is to take a user's zip code to find their county then reference a database of produce with counties each plant is grown in and time of year it's in season. The user will the receive a list of all the produce available to them within a specified radius. The point of the project is to advise users on what produce to buy that can be locally sourced.
 
 ### Functionality
 
-1. Landing page with text box for zip code entry
-    - Either static definition of local (250mi) or allow user to choose radius
-2. View sorts all zip codes within specified radius from user's zip code
-3. View finds all produce applicable for list of zip codes
+1. Landing page with text box for zip code entry and finds their county
+2. View sorts all counties within specified radius from user's county
+3. View finds all produce applicable for list of counties
 4. View filters produce by seasonality using current date
 5. Data is sorted by distance to user's zip code
 6. Data is displayed as a list to user
@@ -23,38 +22,26 @@ The goal of the project is to take a user's zip code then reference a database o
 
 ### Data Model
 
-- Primary model of Zip Codes
+- Primary model of Counties
     - many to many relationship with individual produce
     - Produce model has in season dates
-    
-- For calculating distance between zip codes (http://code.activestate.com/recipes/393241-calculating-the-distance-between-zip-codes/) 
 
 #### Sources
 
-- USDA
-    - USDA Census of Agriculture
-        - issue: data is county level
-- FDA
-- _Issue:_ Contacted OSU, PSU & UofO dept. of Agriculture for assistance in finding data sources
+- USDA NASS Quick Stats (https://quickstats.nass.usda.gov/api)
 
 ### Components
 
-- Data Scraping
-    - Beautiful Soup (https://www.crummy.com/software/BeautifulSoup/)
+- Build app that captures JSON from USDA NASS Quick Stats to populate model
 - Model
     - PostgreSQL
 - Django
-    - Pagination
-    - REST Framework? (would I need it if I use JS framework?)
-- JS Framework? (would I need it if I use REST framework?)
+- JS Framework
     - React
-    - _Alternative:_ Angular
 - CSS Framework
-    - Bootstrap
-    - _Alternative:_ Material    
+    - Material
 - Map API
-    - Mapbox (https://www.mapbox.com/api-documentation/)
-    - _Alternative:_ Google Maps (https://developers.google.com/maps/)
+    - Google Maps (https://developers.google.com/maps/)
 - Deployment 
     - AWS Elastic Beanstalk (http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/GettingStarted.html)
         - EC2
@@ -71,13 +58,13 @@ The goal of the project is to take a user's zip code then reference a database o
         4. Greater Washington
     - Build basic front end for testing
 - **Milestone 2**
-    - Apply CSS framework
-    - Expand front end with JS framework?
-    - Implement REST framework?
-- **Milestone 3**
     - Display data geographically w/ map API
+    - Redo front end with JS framework?
+- **Milestone 3**
+    - Apply CSS framework   
     - Deploy site on AWS or Digital Ocean
 - **Milestone 4** (post-class)
     - Find more data sets
     - Use CAERS DB (https://www.fda.gov/Food/ComplianceEnforcement/ucm494015.htm) for alerts on unsafe foods
+    - Allow email signups where monthly updates of 'whats fresh' is listed
     - Find recipe API, supply recipes for each item listed
