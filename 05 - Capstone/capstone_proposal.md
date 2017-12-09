@@ -32,20 +32,20 @@ The goal of the project is to take a user's zip code to find their county then r
 
 ### Components
 
-- Build app that captures JSON from USDA NASS Quick Stats to populate model
+- Build small app that captures JSON from USDA NASS Quick Stats to populate model
+
+- Web Framework
+    - Django
 - Model
     - PostgreSQL
-- Django
 - JS Framework
     - React
 - CSS Framework
     - Material
 - Map API
-    - Google Maps (https://developers.google.com/maps/)
+    - Google Maps
 - Deployment 
-    - AWS Elastic Beanstalk (http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/GettingStarted.html)
-        - EC2
-        - RDS
+    - AWS Elastic Beanstalk
 
 ### Schedule
 
