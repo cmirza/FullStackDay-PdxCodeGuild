@@ -29,6 +29,7 @@ The goal of the project is to take a user's zip code to find their county then r
 #### Sources
 
 - USDA NASS Quick Stats (https://quickstats.nass.usda.gov/api)
+- Manually lookup seasonality in Wikipedia
 
 ### Components
 
@@ -56,7 +57,7 @@ The goal of the project is to take a user's zip code to find their county then r
         2. Greater Oregon
         3. Seattle/Tacoma Metro
         4. Greater Washington
-    - Build basic front end for testing
+    - Build basic front end
 - **Milestone 2**
     - Display data geographically w/ map API
     - Redo front end with JS framework?
