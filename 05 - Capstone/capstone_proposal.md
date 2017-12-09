@@ -42,7 +42,7 @@ The goal of the project is to take a user's zip code to find their county then r
 - JS Framework
     - React
 - CSS Framework
-    - Material
+    - Material or Bootstrap
 - Map API
     - Google Maps
 - Deployment 
