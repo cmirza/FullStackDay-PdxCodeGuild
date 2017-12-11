@@ -36,14 +36,22 @@ The goal of the project is to take a user's zip code to find their county then r
 
 - **Web Framework**
     - Django
+        1. Take user zip code to find current location
+        2. Filter produce by items that are currently in season
+        3. For each item in filtered set, calculate distance from current location and sort list by distance
+        4. Filter set by items <500mi from current location
 - **Model**
-    - PostgreSQL
+    - PostgreSQL (can I initially use SQLite then migrate to PostgreSQL later?)
+        - Name of produce
+            - Start season, End Season
+        - Counties in Oregon, Washington, California
 - **JS Framework**
-    - React
+    - React (not sure how React would fit exactly)
 - **CSS Framework**
     - Material-UI
 - **Map API**
     - Google Maps
+        - Turn final filtered set into JSON object to pass to Google Maps API, return map with pins
 - **Deployment**
     - AWS Elastic Beanstalk
 
