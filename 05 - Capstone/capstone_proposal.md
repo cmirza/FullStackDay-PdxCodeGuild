@@ -3,7 +3,7 @@ Capstone Proposal
 
 ### Product Name
 
-- **GreenPoint**
+- **FreshPoint**
 
 ### Project Overview
 
@@ -41,7 +41,7 @@ The goal of the project is to take a user's zip code to find their county then r
 - **JS Framework**
     - React
 - **CSS Framework**
-    - Material or Bootstrap
+    - Material-UI
 - **Map API**
     - Google Maps
 - **Deployment**
@@ -50,7 +50,7 @@ The goal of the project is to take a user's zip code to find their county then r
 ### Schedule
 
 - **Milestone 1**
-    - Find relevant data with API or scrape data from other sources
+    - Collect relevant data with API
     - Build model with appropriate data
         1. Portland Metro
         2. Greater Oregon
@@ -62,7 +62,7 @@ The goal of the project is to take a user's zip code to find their county then r
     - Redo front end with JS framework?
 - **Milestone 3**
     - Apply CSS framework   
-    - Deploy site on AWS or Digital Ocean
+    - Deploy site on AWS
 - **Milestone 4** (post-class)
     - Find more data sets
     - Use CAERS DB (https://www.fda.gov/Food/ComplianceEnforcement/ucm494015.htm) for alerts on unsafe foods
