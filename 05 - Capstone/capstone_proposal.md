@@ -3,8 +3,7 @@ Capstone Proposal
 
 ### Product Name
 
-- Local Nature
-- Fresh Finder
+- **GreenPoint**
 
 ### Project Overview
 
@@ -35,17 +34,17 @@ The goal of the project is to take a user's zip code to find their county then r
 
 - Build small app that captures JSON from USDA NASS Quick Stats to populate model
 
-- Web Framework
+- **Web Framework**
     - Django
-- Model
+- **Model**
     - PostgreSQL
-- JS Framework
+- **JS Framework**
     - React
-- CSS Framework
+- **CSS Framework**
     - Material or Bootstrap
-- Map API
+- **Map API**
     - Google Maps
-- Deployment 
+- **Deployment**
     - AWS Elastic Beanstalk
 
 ### Schedule
