@@ -18,7 +18,7 @@ def savetodo(request):
 
     print(reverse('todo:index'))
 
-    todo_item = TodoItem(todo_text=todo_text)
+    todo_item = TodoItem(todo_text=todo_text, completed=False)
     todo_item.save()
 
     return HttpResponseRedirect(reverse('todo:index'))

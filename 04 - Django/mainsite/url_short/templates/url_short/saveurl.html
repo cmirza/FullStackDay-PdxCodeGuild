@@ -1,3 +1,4 @@
+<title>URL Shortener</title>
 <style>
 input[type="text"] {
     margin-top: 20px;
@@ -5,6 +6,7 @@ input[type="text"] {
 }
 body {
     text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
 }
 #container {
     width: 60%;
@@ -12,16 +14,17 @@ body {
     padding: 0 20px 40px 20px;
     text-align: center;
     border: 1px solid black;
+    border-radius: 10px;
     display: inline-block;
 }
-#new_url {
+#message {
     padding-top: 20px;
 }
 </style>
 
 <h1>URL Shortener</h1>
 <div id="container">
-<div id="new_url">Your shortened URL is: <a href="{{ new_url }}">{{ new_url }}</a></div>
+<div id="message">Your shortened URL is: <a href="{{ new_url }}">{{ new_url }}</a></div>
 <form action="{% url 'url_short:saveurl' %}" method="post">
     {% csrf_token %}
     <input type="text" name="url_string"/>

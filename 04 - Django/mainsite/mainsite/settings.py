@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'library.apps.LibraryConfig',
+    'url_short.apps.UrlShortConfig',
     'polls.apps.PollsConfig',
     'todo.apps.TodoConfig',
     'django.contrib.admin',

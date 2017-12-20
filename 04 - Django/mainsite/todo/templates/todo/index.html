@@ -1,6 +1,18 @@
 {% load static %}
 
 <link  rel="stylesheet" type="text/css" href="{% static 'todo/style.css'%}"/>
+<style>
+    ul li:nth-child(odd) {
+        background-color:lavender;
+    }
+    form {
+        display:inline;
+    }
+    #completed_list li {
+        text-decoration: line-through;
+    }
+</style>
+
 
 <h1>Todo</h1>
 
