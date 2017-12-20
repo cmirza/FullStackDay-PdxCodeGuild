@@ -12,17 +12,20 @@ The goal of the project is to take a user's zip code to find the state they're c
 ### Functionality
 
 1. Landing page with text box for zip code entry
-2. View finds which state they're closest to
+2. View finds which state they're in
 3. View gathers all produce for that state
-4. View filters list by current season using current date
+4. View filters list by current season using date
 5. Data is displayed to user as grid of items with images and description
-6. When user clicks on item, a detail view is given with complete season data for the user's state and map view of states in which the item is grown
+6. When user clicks on item, a detail view is given with season data for the user's state and map of states in which the item is grown
 
 ### Data Model
 
-- Primary model of vegetables
-    - many to many relationship with states
-    - **issue:** not sure where season months is kept
+- Vegetable Model
+    - name, type, image, description
+- US states Model
+    - state name
+- Seasons Model
+    - Vegetable ID, State ID, seasons (string)
 
 #### Sources
 
@@ -32,39 +35,34 @@ The goal of the project is to take a user's zip code to find the state they're c
 
 - **Web Framework**
     - Django
-        1. Take user zip code to find user's state
-        2. Find all produce for that state
-        3. Filter list by items currently in season
+        - Get location (Google GeoCode API (https://developers.google.com/maps/documentation/geocoding/start))
+        - Find all produce for that state
+        - Filter list by items currently in season
 - **Model**
     - PostgreSQL (can I initially use SQLite then migrate to PostgreSQL later?)
-        - Name of produce
-            - Months in season (do I use an Associative Entity: https://en.wikipedia.org/wiki/Associative_entity ?)
-        - List of US states
 - **JS Framework**
-    - React (not sure how React would fit exactly)
+    - React
 - **CSS Framework**
     - Material-UI
 - **Map**
-    - Use D3.js to highlight states
-        - http://bl.ocks.org/michellechandra/0b2ce4923dc9b5809922
-        - https://bl.ocks.org/chucklam/f628765b873d707a3d0e44ffc78deab8
-        
+    - Google GeoCharts https://developers.google.com/chart/interactive/docs/gallery/geochart
 - **Deployment**
     - AWS Elastic Beanstalk
 
 ### Schedule
 
 - **Milestone 1**
-    - Gather data set ✓
-    - Import data set into database
+    - Gather data
+    - Create database
     - Implement basic functionality
     - Build basic front end
 - **Milestone 2**
-    - Implement map in detail view with D3.js
-    - Redo front end with JS framework?
+    - Create detail view for each vegetable
+    - Redo templates with Material-UI
+    - Move database to PostgreSQL
 - **Milestone 3**
-    - Apply CSS framework   
+    - Rework site with React to implement single page functionality
     - Deploy site on AWS
-- **Milestone 4** (stretch goals)
+- **Milestone 4**
     - Use Yummly API to get recipe ideas: https://developer.yummly.com/
-    - Allow email signups where monthly updates of 'whats fresh' is listed
+    - Create email newsletter function
