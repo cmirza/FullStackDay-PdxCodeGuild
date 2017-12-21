@@ -13,15 +13,15 @@ FreshPoint
 	- ~~Create custom management commands for importing JSON~~
 	    - ~~Iterate through JSON, creating an entry for each vegetable in Vegetable table~~
 	    - ~~Iterate through JSON, creating entry for each season and ID for each vegetable and state in Seasons table~~
-- **Verify Model is correct**
-	- Check if responses from the database are consistent with data in JSON file
+- **~~Verify Model is correct~~**
+	- ~~Check if responses from the database are consistent with data in JSON file~~
 
 ### View
 - **Results Page**
-	- Get user zip code from text box
-	- Pass zip code to Google GeoCode API
-		- https://developers.google.com/maps/documentation/geocoding/start
-	- Parse JSON response to get state
+	- ~~Get user zip code from text box~~
+	- ~~Pass zip code to Google GeoCode API~~
+		- ~~https://developers.google.com/maps/documentation/geocoding/start~~
+	- ~~Parse JSON response to get state~~
     - Find vegetables for user
     	- Filter Seasons table by user's state
     	- Get Season ID
@@ -54,6 +54,18 @@ FreshPoint
 - **Apply Material-UI CSS framework**
 - **Use PostgreSQL for database**
 - **Use React.js to create single page app**
+- **Management Mode**
+	- Add items, update seasons
 
 ## Deployment
 - **AWS Beanstalk**
+
+
+
+
+### NOTES
+
+#### AJAX
+
+- JsonResponse in Django 
+	returns json dict
