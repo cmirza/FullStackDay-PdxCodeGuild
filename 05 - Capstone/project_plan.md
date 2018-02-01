@@ -21,21 +21,23 @@ FreshPoint
 	- ~~Get user zip code from text box~~
 	- ~~Pass zip code to Google GeoCode API~~
 		- ~~https://developers.google.com/maps/documentation/geocoding/start~~
-	- ~~Parse JSON response to get state~~
-    - Find vegetables for user
-    	- Filter Seasons table by user's state
-    	- Get Season ID
-    		- Get string of current month
-    			- if day < ( days in month / 2 )
-    				- append 'early'
-    			- if day > ( days in month / 2 )
-    				- append 'late'
-    		- Filter Season ID dict to get current Season ID
-    	- Filter results by Season ID
-    - Calculate months left until out of season(?)
-	- Create context object for 'name', 'type', 'image' and 'description'
-	    - Create URL links to detail with 'veg id' and 'state id'
-	- Render results template with context
+		- ~~Parse JSON response to get state~~
+	- ~~Get Season ID~~
+		- ~~Get string of current month, day and year~~
+		- ~~Find days in month~~
+			- ~~if day < ( days in month / 2 )~~
+				- ~~month = current month*2-1~~
+			- ~~otherwise~~
+				- ~~month = current month*2~~
+		- ~~Add leading zero if single digit~~
+    - ~~Find vegetables for user~~
+    	- ~~Get user's state object from model~~
+    	- ~~Filter season data by user's state and current month~~
+    	- ~~Iterate over filtered season data~~
+    		- ~~Create new list with relevant vegetables from vegetable model~~
+    - ~~Pass context to template~~
+    - ~~Create warning if item is in last month~~ (27010 for example)
+	- ~~Create URL links to detail template~~
 
 ### Template
 - **Landing Page**
@@ -51,21 +53,19 @@ FreshPoint
 	- Footer
 
 ### Enhancements
-- **Apply Material-UI CSS framework**
-- **Use PostgreSQL for database**
-- **Use React.js to create single page app**
-- **Management Mode**
-	- Add items, update seasons
+- **~~Google GeoChart Map Visualization~~**
+- **~~Apply Bootstrap CSS framework~~**
+- **~~REST API~~**
+- **~~Vue.js~~**
+- **Edamam Reipe API**
 
 ## Deployment
 - **AWS Beanstalk**
-
-
-
+	- https://realpython.com/blog/python/deploying-a-django-app-and-postgresql-to-aws-elastic-beanstalk/
 
 ### NOTES
 
-#### AJAX
+#### Issues
 
-- JsonResponse in Django 
-	returns json dict
+
+

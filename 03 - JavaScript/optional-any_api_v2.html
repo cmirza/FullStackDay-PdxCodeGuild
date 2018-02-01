@@ -91,6 +91,8 @@
 
                 http_get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key="+flickr_api_key+"&tags="+search_term+"&per_page=8&page="+current_page+"&format=json&nojsoncallback=1", function (data) {
 
+                    console.log(data);
+
                     for (let i = 0; i < data.photos.photo.length; i++) {
 
                     // create div for selected day
