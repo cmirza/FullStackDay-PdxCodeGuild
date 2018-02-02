@@ -59,13 +59,6 @@ FreshPoint
 - **~~Vue.js~~**
 - **Edamam Reipe API**
 
-## Deployment
-- **AWS Beanstalk**
-	- https://realpython.com/blog/python/deploying-a-django-app-and-postgresql-to-aws-elastic-beanstalk/
-
-### NOTES
-
-#### Issues
 
 
 
